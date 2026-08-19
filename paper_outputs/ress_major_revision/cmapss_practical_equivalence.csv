@@ -1,0 +1,7 @@
+domain,contrast,metric,candidate_margin,finite_design_mean,within_margin_cells,negative_beyond_margin_cells,positive_beyond_margin_cells,total_task_seed_cells,status
+C-MAPSS,OCM-Asym minus RAST-GRU,rmse,0.5,0.12272577318873461,5,7,8,20,exploratory transparent band; not a validated SESOI or equivalence test
+C-MAPSS,OCM-Asym minus RAST-GRU,rmse,1.0,0.12272577318873461,14,3,3,20,exploratory transparent band; not a validated SESOI or equivalence test
+C-MAPSS,OCM-Asym minus RAST-GRU,rmse,2.0,0.12272577318873461,17,1,2,20,exploratory transparent band; not a validated SESOI or equivalence test
+C-MAPSS,OCM-Asym minus RAST-GRU,lpr30,0.01,-0.03826167646149087,1,12,7,20,exploratory transparent band; not a validated SESOI or equivalence test
+C-MAPSS,OCM-Asym minus RAST-GRU,lpr30,0.025,-0.03826167646149087,2,12,6,20,exploratory transparent band; not a validated SESOI or equivalence test
+C-MAPSS,OCM-Asym minus RAST-GRU,lpr30,0.05,-0.03826167646149087,8,8,4,20,exploratory transparent band; not a validated SESOI or equivalence test

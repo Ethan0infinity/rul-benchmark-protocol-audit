@@ -1,0 +1,12 @@
+date_or_period,event,source_record,evidence_status
+2026-07-04,C-MAPSS project scaffold and initial experiment design,local project records,precedes later governance analyses; no external timestamp
+before 2026-07-20,Common-protocol C-MAPSS training grid completed,analysis chronology,results later inspected; retrospective evidence
+2026-07-26,Crossed seed-engine reanalysis and threshold diagnostics,analysis chronology,result-informed reanalysis; no retraining
+2026-07-26/27,"Normalization, perturbation, mask, and latency audits",analysis chronology,post-result sensitivity families
+2026-07-29 to 2026-08-08,Retrospective extension and release-governance revisions,round 10--19 response records,completed after earlier result access
+2026-08-09,Evidence snapshot 2026-08-09-r21 assembled,workflow state,local evidence snapshot; not a prospective protocol
+2026-08-12T09:10:33Z,Battery protocol externally registered,external timestamp record,precedes battery training and test-label evaluation
+after 2026-08-12 registration,Registered battery pair trained and evaluated,battery results audit,prospectively frozen worked execution; same investigator
+2026-08-16,Source provenance correction verified in v5.3.1,Git tag v5.3.1 and repository history,corrected source snapshot; does not alter evidence timing
+2026-08-16,RESS major-revision exploratory analyses generated,major-revision evidence generator,"post-result maintenance, equivalence, baseline, and target-definition sensitivities"
+2026-08-16,RESS submission object rebuilt,Git tag v5.4.0 and submission_identity.json,release synchronization and journal-format revision; no evidence-status upgrade

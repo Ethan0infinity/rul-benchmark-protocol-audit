@@ -1,0 +1,6 @@
+model,macro_rmse_cycles,macro_lpr_q10_e0,pooled_eligible_windows,pooled_late_events,pooled_late_frequency,training_seed,analysis_status
+training-life-prior,23.72026292196924,0.25,48.0,8.0,0.16666666666666666,deterministic,post-registration exploratory baseline; excluded from registered hypothesis tests
+capacity-index-linear,25.998161365159852,0.8823529411764706,48.0,40.0,0.8333333333333334,deterministic,post-registration exploratory baseline; excluded from registered hypothesis tests
+window-summary-ridge,12.710918395595938,0.9772727272727273,48.0,47.0,0.9791666666666666,deterministic,post-registration exploratory baseline; excluded from registered hypothesis tests
+Battery-GRU-Core (five-stream mean),30.050840502180176,0.8610071301247771,48.0,40.8,0.85,"mean over 42,123,2024,2025,2026",registered model reference; baseline comparison itself is post-registration exploratory
+Battery-GRU-Asym (five-stream mean),32.5963846213148,0.7833333333333334,48.0,38.0,0.7916666666666666,"mean over 42,123,2024,2025,2026",registered model reference; baseline comparison itself is post-registration exploratory

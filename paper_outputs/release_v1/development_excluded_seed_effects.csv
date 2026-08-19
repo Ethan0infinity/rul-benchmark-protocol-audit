@@ -1,0 +1,76 @@
+scope,aggregation,subset,metric,composite_seed,ocm_minus_rast,task_count,engine_count,interpretation
+FD001-FD003 development-task-excluded,task-specific,FD001,rmse,42,0.1586657093368231,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,rmse,123,-2.453476488107775,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,rmse,2024,-1.0176548414866833,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,rmse,2025,-0.8226257793209104,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,rmse,2026,0.10417614679777287,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,rmse,42,-0.5808090645529909,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,rmse,123,0.9751536259524496,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,rmse,2024,-0.5886861926607594,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,rmse,2025,-0.8913349347777277,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,rmse,2026,-0.21344125842931838,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,rmse,42,0.8820647296595503,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,rmse,123,-0.1798275406903791,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,rmse,2024,2.2610292715354756,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,rmse,2025,-0.4224394466713015,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,rmse,2026,0.7773443547419419,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,rmse,42,0.15330712481446085,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,rmse,42,-0.1694173445726399,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,rmse,123,-0.5527168009485681,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,rmse,123,0.032023347428596693,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,rmse,2024,0.21822941246267766,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,rmse,2024,-0.09963670198050245,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,rmse,2025,-0.7121333869233132,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,rmse,2025,-0.788102404676783,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,rmse,2026,0.22269308103679877,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,rmse,2026,0.04143732541252021,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,task-specific,FD001,nasa_per_engine,42,-0.35006799653037834,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,nasa_per_engine,123,-0.8631151197425133,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,nasa_per_engine,2024,-1.3050458094626611,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,nasa_per_engine,2025,-0.3835157256910122,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,nasa_per_engine,2026,0.21571636904972324,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,nasa_per_engine,42,-0.014057320081542812,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,nasa_per_engine,123,-1.1371072054221552,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,nasa_per_engine,2024,-1.1228281470324912,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,nasa_per_engine,2025,-1.0066466697126302,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,nasa_per_engine,2026,0.1865274619139745,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,nasa_per_engine,42,1.6564307980709492,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,nasa_per_engine,123,0.04380339123439425,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,nasa_per_engine,2024,3.063590907295705,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,nasa_per_engine,2025,-0.13329703539746962,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,nasa_per_engine,2026,0.2819386613672834,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,nasa_per_engine,42,0.430768493819676,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,nasa_per_engine,42,0.2766785059976842,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,nasa_per_engine,123,-0.6521396446434248,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,nasa_per_engine,123,-0.8201349434752738,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,nasa_per_engine,2024,0.21190565026685082,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,nasa_per_engine,2024,-0.2504531161178889,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,nasa_per_engine,2025,-0.5078198102670374,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,nasa_per_engine,2025,-0.6806160426240075,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,nasa_per_engine,2026,0.2280608307769937,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,nasa_per_engine,2026,0.21367345463490128,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,task-specific,FD001,lpr30,42,0.04,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,lpr30,123,-0.04,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,lpr30,2024,-0.04000000000000001,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,lpr30,2025,0.16,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD001,lpr30,2026,-0.32,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,lpr30,42,0.0819672131147541,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,lpr30,123,0.01639344262295081,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,lpr30,2024,-0.09836065573770492,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,lpr30,2025,0.032786885245901634,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD002,lpr30,2026,-0.21311475409836067,1,259,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,lpr30,42,0.19999999999999998,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,lpr30,123,0.0,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,lpr30,2024,-0.05,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,lpr30,2025,0.15000000000000002,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,task-specific,FD003,lpr30,2026,-0.1,1,100,descriptive paired seed effect; no task-population inference
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,lpr30,42,0.10732240437158469,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,lpr30,42,0.09433962264150943,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,lpr30,123,-0.007868852459016397,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,lpr30,123,0.0,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,lpr30,2024,-0.06278688524590165,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,lpr30,2024,-0.07547169811320756,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,lpr30,2025,0.11426229508196722,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,lpr30,2025,0.0849056603773585,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,equal-task macro,FD001-FD003,lpr30,2026,-0.21103825136612023,3,459,descriptive fixed-task aggregation; tasks are not resampled
+FD001-FD003 development-task-excluded,engine-pooled recomputation,FD001-FD003,lpr30,2026,-0.2169811320754717,3,459,descriptive fixed-task aggregation; tasks are not resampled

@@ -1,0 +1,29 @@
+\begin{table*}[!t]
+\centering
+\scriptsize
+\caption{Empirical 12-dimensional swap-null calibration. The simulation preserves observed prediction midpoints and difference magnitudes, uses one Rademacher sign per training seed and matched engine, shares seed signs across the four fixed tasks, and shares each task's engine signs across RMSE, NASA/engine, and LPR@30. The four tasks are never resampled. Exact binomial intervals quantify Monte Carlo uncertainty for event rates; zero observed failures are not proof of general conservatism.}
+\label{tab:max-t-family-calibration}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{0.17\linewidth}p{0.31\linewidth}rrrlrr}
+\toprule
+Method & Calibration quantity & Estimate & MCSE & Events & Exact 95\% binomial interval & Simulations & $B$ \\
+\midrule
+studentized max-t diagnostic envelope & family-wise null coverage over all 12 contrasts & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+centered bootstrap plus Holm12 & family-wise null rejection probability & 0.000 & 0.000 & 0 & [0.000, 0.004] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD001 rmse & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD001 nasa\_per\_engine & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD001 lpr30 & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD002 rmse & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD002 nasa\_per\_engine & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD002 lpr30 & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD003 rmse & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD003 nasa\_per\_engine & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD003 lpr30 & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD004 rmse & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD004 nasa\_per\_engine & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & pointwise null coverage: FD004 lpr30 & 1.000 & 0.000 & 1000 & [0.996, 1.000] & 1000 & 999 \\
+studentized max-t diagnostic envelope & mean bootstrap critical value & 3.338 & 0.002 & -- & -- & 1000 & 999 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "release-evidence-v1",
+  "metrics": [
+    {
+      "metric_id": "LPR@tau,epsilon",
+      "numerator": "eligible engines with prediction minus true RUL greater than epsilon",
+      "denominator": "all engines with true RUL at or below tau",
+      "undefined_when": "no eligible engines"
+    },
+    {
+      "metric_id": "ZIMLE@tau,epsilon",
+      "numerator": "sum of max(prediction minus true RUL minus epsilon, 0)",
+      "denominator": "all engines with true RUL at or below tau",
+      "undefined_when": "no eligible engines"
+    },
+    {
+      "metric_id": "CMLE@tau,epsilon",
+      "numerator": "sum of positive late excess beyond epsilon",
+      "denominator": "late-event engines only",
+      "undefined_when": "no late event"
+    },
+    {
+      "metric_id": "late_CVaR95",
+      "numerator": "mean of the upper 5 percent of positive late excess values",
+      "denominator": "late-event tail observations",
+      "undefined_when": "no late event"
+    }
+  ]
+}

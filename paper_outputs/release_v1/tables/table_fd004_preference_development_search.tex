@@ -1,0 +1,22 @@
+\begin{table}[!htbp]
+\centering
+\caption{Complete nine-cell FD004 validation-only preference-development search.}
+\label{tab:fd004-preference-search}
+\small
+\begin{tabular}{rrrrrr}
+\toprule
+Rank & $\lambda_{\mathrm{life}}$ & $\lambda_{\mathrm{late}}$ & Best epoch & Validation score & Validation RMSE \\
+\midrule
+1 & 1.25 & 1.50 & 16 & 0.1366 & 14.469 \\
+2 & 1.50 & 1.00 & 16 & 0.1380 & 14.645 \\
+3 & 2.00 & 1.00 & 1 & 0.1445 & 15.454 \\
+4 & 1.50 & 1.50 & 17 & 0.1557 & 14.251 \\
+5 & 1.25 & 1.25 & 3 & 0.1612 & 14.936 \\
+6 & 1.25 & 1.00 & 6 & 0.1634 & 15.213 \\
+7 & 2.00 & 1.25 & 7 & 0.1655 & 15.480 \\
+8 & 1.50 & 1.25 & 9 & 0.1660 & 15.545 \\
+9 & 2.00 & 1.50 & 4 & 0.1817 & 14.899 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\linewidth}\footnotesize Notes: This initial search uses one FD004 development split and seed 31415. Rank uses the validation risk score only; no test metric enters selection. A later retrospective 3$\times$3 split--stream refit repeats the fixed nine-point grid and is reported separately; its selection counts remain conditional on those nine examined cells and do not provide selection-adjusted test performance.\end{minipage}
+\end{table}

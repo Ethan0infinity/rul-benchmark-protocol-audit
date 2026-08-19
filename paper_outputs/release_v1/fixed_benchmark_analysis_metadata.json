@@ -1,0 +1,36 @@
+{
+  "analysis": "fixed-benchmark evidence release",
+  "bootstrap_algorithm": {
+    "factors": [
+      "composite seed",
+      "matched official test engine"
+    ],
+    "sampling": "independent empirical resampling with replacement at each factor",
+    "nonlinear_metric_order": "for each bootstrap row and sampled seed, aggregate sampled matched-engine losses inside the metric first (including square-mean-root for RMSE); then average the seed-specific metric values; finally subtract OCM and RAST aggregates",
+    "repetitions": 10000,
+    "centered_p": "(1 + count(|Delta_b - Delta_hat| >= |Delta_hat|)) / (B + 1)",
+    "finite_p_floor": 9.999000099990002e-05,
+    "p_mcse": "sqrt(p_hat * (1-p_hat) / (B+1))",
+    "max_t_envelope": "studentized diagnostic envelope across 12 fixed-task contrasts; calibrated only under the documented empirical swap-null",
+    "studentization": "bootstrap SD per contrast; SE <= 1e-12 is inactive with zero-width envelope",
+    "dependency": "shared bootstrap row and seed draw across all contrasts; task-specific engine draws shared across each task's three metrics",
+    "rng_seed": 2026072603
+  },
+  "small_cluster_sensitivity": {
+    "seed_levels": 5,
+    "exact_signflip_patterns": 32,
+    "calibration_simulations": 300,
+    "bootstrap_repetitions_per_simulation": 499,
+    "scope": "illustrative design-matched calibration; not a proof of inferential validity"
+  },
+  "max_t_family_calibration": {
+    "dgp": "empirical midpoint swap-null",
+    "training_seed_signs": "one Rademacher sign per seed, shared across fixed tasks",
+    "engine_signs": "one task-specific Rademacher sign per matched engine, shared across three metrics",
+    "task_resampling": "none",
+    "simulations": 1000,
+    "bootstrap_repetitions_per_simulation": 999,
+    "rng_seed": 2026072701,
+    "scope": "design-specific diagnostic; not confirmatory validation"
+  }
+}

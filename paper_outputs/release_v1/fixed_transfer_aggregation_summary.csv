@@ -1,0 +1,13 @@
+scope,aggregation,metric,ocm_minus_rast,task_count,engine_count,composite_seed_count,interpretation
+FD001-FD003 fixed-transfer,equal-task macro,rmse,-0.13412411391158877,3,459,5,descriptive fixed-task estimand; tasks are not resampled
+FD001-FD003 fixed-transfer,engine-pooled recomputation,rmse,-0.1967391556777617,3,459,5,descriptive engine-pooled estimand; not task-population evidence
+FD001-FD003 fixed-transfer,equal-task macro,nasa_per_engine,-0.05784489600938832,3,459,5,descriptive fixed-task estimand; tasks are not resampled
+FD001-FD003 fixed-transfer,engine-pooled recomputation,nasa_per_engine,-0.25217042831691694,3,459,5,descriptive engine-pooled estimand; not task-population evidence
+FD001-FD003 fixed-transfer,equal-task macro,lpr30,-0.01202185792349727,3,459,5,descriptive fixed-task estimand; tasks are not resampled
+FD001-FD003 fixed-transfer,engine-pooled recomputation,lpr30,-0.022641509433962266,3,459,5,descriptive engine-pooled estimand; not task-population evidence
+FD001-FD004 all fixed tasks,equal-task macro,rmse,0.12272577318873465,4,707,5,descriptive fixed-task estimand; tasks are not resampled
+FD001-FD004 all fixed tasks,engine-pooled recomputation,rmse,0.1894977502395548,4,707,5,descriptive engine-pooled estimand; not task-population evidence
+FD001-FD004 all fixed tasks,equal-task macro,nasa_per_engine,-0.3535399798653392,4,707,5,descriptive fixed-task estimand; tasks are not resampled
+FD001-FD004 all fixed tasks,engine-pooled recomputation,nasa_per_engine,-0.5988985629319601,4,707,5,descriptive engine-pooled estimand; not task-population evidence
+FD001-FD004 all fixed tasks,equal-task macro,lpr30,-0.03826167646149088,4,707,5,descriptive fixed-task estimand; tasks are not resampled
+FD001-FD004 all fixed tasks,engine-pooled recomputation,lpr30,-0.05408805031446541,4,707,5,descriptive engine-pooled estimand; not task-population evidence

@@ -1,0 +1,14 @@
+family,normalized_amplitude,training_scale_definition,amplitude_per_median_training_iqr,amplitude_per_median_local_abs_change
+Gaussian noise SD,0.01,within-condition training sensor SD,0.010663821322623208,0.03384143443717479
+Gaussian noise SD,0.03,within-condition training sensor SD,0.03199146396786962,0.10152430331152437
+Gaussian noise SD,0.05,within-condition training sensor SD,0.05331910661311604,0.16920717218587397
+Gaussian noise SD,0.1,within-condition training sensor SD,0.10663821322623208,0.33841434437174794
+Linear-drift endpoint,0.02,within-condition training sensor SD,0.021327642645246416,0.06768286887434959
+Linear-drift endpoint,0.05,within-condition training sensor SD,0.05331910661311604,0.16920717218587397
+Linear-drift endpoint,0.1,within-condition training sensor SD,0.10663821322623208,0.33841434437174794
+Bias magnitude,0.1,within-condition training sensor SD,0.10663821322623208,0.33841434437174794
+Bias magnitude,0.25,within-condition training sensor SD,0.2665955330655802,0.8460358609293698
+Bias magnitude,0.5,within-condition training sensor SD,0.5331910661311604,1.6920717218587396
+Burst-noise SD,0.1,within-condition training sensor SD,0.10663821322623208,0.33841434437174794
+Burst-noise SD,0.25,within-condition training sensor SD,0.2665955330655802,0.8460358609293698
+Burst-noise SD,0.5,within-condition training sensor SD,0.5331910661311604,1.6920717218587396

@@ -1,0 +1,504 @@
+{
+  "analysis_status": "post-result exploratory major-revision evidence",
+  "generator": "scripts/build_ress_major_revision_evidence.py",
+  "inputs": [
+    {
+      "path": "paper_outputs/release_v1/primary_seed_level_effects.csv",
+      "sha256": "84db32121c00080b70cafc1895ee2352dd0a059f07b446f228b5002771c6c459",
+      "bytes": 5094
+    },
+    {
+      "path": "results/ablation_fd004_seed123_weighted_huber_no_asymmetry/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "4513e8b6de673a29c42286c1ce2c0a67b2343eeb03a5c3969cbd0a6fc9dc028d",
+      "bytes": 8000
+    },
+    {
+      "path": "results/ablation_fd004_seed2024_weighted_huber_no_asymmetry/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "47b24044e690f0c738c96914dae0bb683f2aa64e8f40d2288a0ed74fccacc661",
+      "bytes": 8002
+    },
+    {
+      "path": "results/ablation_fd004_seed2025_weighted_huber_no_asymmetry/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "4eab60771ceab55e24e35733c8a32c80e48fb2322fcd3b3f752732b2b5e2efc3",
+      "bytes": 7946
+    },
+    {
+      "path": "results/ablation_fd004_seed2026_weighted_huber_no_asymmetry/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "6710ba67309086b30aefb1267b3880d07e32a4d235409c5833c24498f0d2772d",
+      "bytes": 7968
+    },
+    {
+      "path": "results/ablation_fd004_seed42_weighted_huber_no_asymmetry/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "f1c427e285c75952bf8b48e47606c4de84c72db88a63ca33f29629cf09b7160c",
+      "bytes": 7994
+    },
+    {
+      "path": "results/core_ocm_seed123/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "3df8d263805bfae48ca6aa20034fe6ece51f8c43ed579d32eca0f216674f1192",
+      "bytes": 3166
+    },
+    {
+      "path": "results/core_ocm_seed123/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "024c9fa55420c6b7d8fd446fafa144714ba5e7f4b58e9875d429879682f6e7e3",
+      "bytes": 8329
+    },
+    {
+      "path": "results/core_ocm_seed123/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "25e8441c66b8907062fe98aeba38b1d433b28138f18d503e1c02b11a2e853b4a",
+      "bytes": 3174
+    },
+    {
+      "path": "results/core_ocm_seed2024/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "5369d37c5e74fcc50b196235ca77dacb12fd012ddb328b1102876d5051e31e06",
+      "bytes": 3186
+    },
+    {
+      "path": "results/core_ocm_seed2024/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "516744e0c1b726f775ac7ac615daad5366697a05fb44a0ffa79fd35bf5c86fcd",
+      "bytes": 8299
+    },
+    {
+      "path": "results/core_ocm_seed2024/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "2b2ebdb5b5048106f77262372698213290a4dc07b9e829e361f3cfbeefe1c2cd",
+      "bytes": 3177
+    },
+    {
+      "path": "results/core_ocm_seed2025/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "c7541728de02c848185cd0e91af0302c1c892122fdecbe92c116800acf2ced12",
+      "bytes": 3139
+    },
+    {
+      "path": "results/core_ocm_seed2025/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "f8732b2666964f8d4ae0178bb87288d75303448cab7c212c2f13ca1590e96d8b",
+      "bytes": 8313
+    },
+    {
+      "path": "results/core_ocm_seed2025/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "9e203aca378f46498c91f71893b894e632f93e0c300d0ca7c803923188edcc90",
+      "bytes": 3175
+    },
+    {
+      "path": "results/core_ocm_seed2026/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "1c807ae69c0e4a24dd5e8b19a941707c2af39a5393069f3c94d9de36f92477d5",
+      "bytes": 3170
+    },
+    {
+      "path": "results/core_ocm_seed2026/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "95aa8b7c32d3e430883f8be2ecb8cf267ec07b915feccf35bf3d4bfabb26336d",
+      "bytes": 8301
+    },
+    {
+      "path": "results/core_ocm_seed2026/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "e25405a805fbbac929c683c4af13e464db976b9a7f2ef6a99bc424ef214e3fcd",
+      "bytes": 3177
+    },
+    {
+      "path": "results/core_ocm_seed42/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "3153ef4c85eebcb5f29b4e98bb353d440709af1111fa69359b90c0935f81436e",
+      "bytes": 3178
+    },
+    {
+      "path": "results/core_ocm_seed42/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "11a1e92485e5cce6c0613f7e7a2c30988325e92547db8b0416be8cf56b8b94cd",
+      "bytes": 8276
+    },
+    {
+      "path": "results/core_ocm_seed42/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "b0b5bd24b925aa743d507f4d4ca4e9d2d8f6845b641b5f45514f041dac4fa9d9",
+      "bytes": 3173
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD001/rast_gru/test_predictions.csv",
+      "sha256": "df9ef72fdbc0942700ac0ffb2b76f7b0e0ae53c322e7e526815027b0d5ed9cc7",
+      "bytes": 3158
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "5e824adf2a9343d5f7c9f262c2932eef6766141e48ef7886259e410d5c1626b3",
+      "bytes": 3165
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD002/rast_gru/test_predictions.csv",
+      "sha256": "303196d05a9ea570a00414551f64bc204873dbcf600491e01a0396ab2e963c37",
+      "bytes": 8327
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "e476f717aeb003c11591a14f29ae0dbf0d8e42731d7bb3ba82e507da535c1dbd",
+      "bytes": 8272
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD003/rast_gru/test_predictions.csv",
+      "sha256": "2df05577a5e4605dda0098d7acc24496e7d748680dbfdb1597d1e247b088501f",
+      "bytes": 3166
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "e1ac2408bf75e6b3f3a43a510f073447f351d9caee85ba4351854db4bd764e66",
+      "bytes": 3180
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD004/rast_gru/test_predictions.csv",
+      "sha256": "cddc43fd07ad0d017037060ac6dac878937eb03c17754b7e513277e108993aec",
+      "bytes": 7977
+    },
+    {
+      "path": "results/paper_main_v3_seed123/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "4f3863c4b3de11748700b89c4a6ed7874b14f4f6a198a170109ecad2e287bc8f",
+      "bytes": 8006
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD001/rast_gru/test_predictions.csv",
+      "sha256": "6802e011ff0d3b6a1bee27dba6f92161397684cbddf27986c1f31852622ca47d",
+      "bytes": 3175
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "b22bc8e91a6f71209eec48ccd428f744bafb130335444fa11127f6df4d9d0d85",
+      "bytes": 3175
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD002/rast_gru/test_predictions.csv",
+      "sha256": "98ee6296e90dc0c8adb6de9e3396bd3e074db8683df428a43973d703ae1080f4",
+      "bytes": 8296
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "7b46b069101766b2e036b9b8ea7740d5d377f593684877348e31f57ae6243ba6",
+      "bytes": 8299
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD003/rast_gru/test_predictions.csv",
+      "sha256": "4188432b51a9eae9025bf1865cc232d37492424b0a7b0ad7d9bb1f6f62bbe54c",
+      "bytes": 3179
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "caba280c5fe56423e4feb8a24d28a96755ef87c4affe9695d194cd6e67f24993",
+      "bytes": 3173
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD004/rast_gru/test_predictions.csv",
+      "sha256": "56ffb16a13697bac36e966e0249efb75c98a02e18e213bb97893e8b3a89be5ce",
+      "bytes": 7997
+    },
+    {
+      "path": "results/paper_main_v3_seed2024/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "56b3466aaf003bff664ae7663572ed0d9ea3969059c59caba8a2bc71b9a17f6d",
+      "bytes": 8000
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD001/rast_gru/test_predictions.csv",
+      "sha256": "dd462f9ebb4c0d53fb2d151e8f1849a8d2ac9b3bb2f79a40d82f143dbdcff88c",
+      "bytes": 3176
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "dd8afe0ecee4d85bace3acffc6d23e0bd7e289afb5592e8af1903591d9e3f346",
+      "bytes": 3161
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD002/rast_gru/test_predictions.csv",
+      "sha256": "712a6d440e81f31c017857d6e8be7803b0e4638090b80cd61da188d3a07a0c96",
+      "bytes": 8293
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "72d20d29de3416ed8f9406fd6679d43509280cc00a470d1e752ac1b4d683b604",
+      "bytes": 8268
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD003/rast_gru/test_predictions.csv",
+      "sha256": "3d55adec482bd3b663f0bd333007440d8ccf26d07dfe5814277bba93d97b1a3c",
+      "bytes": 3170
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "f0f2cfddb45fd6f9809a4414ee18806f34e536bdfded6c303f6d2f60fb10e113",
+      "bytes": 3177
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD004/rast_gru/test_predictions.csv",
+      "sha256": "fffaa5d37bba4587db2af535a0f60a0fb5aaeb3ac70d387b618f5e4449e8009a",
+      "bytes": 7994
+    },
+    {
+      "path": "results/paper_main_v3_seed2025/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "0b6e3acb5c67702c293e82d7b1f9890367926149f174033541f3d2e87d8eaf60",
+      "bytes": 7981
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD001/rast_gru/test_predictions.csv",
+      "sha256": "2a2a8c4baf4e6844f79ff4703484ce76620d2f2e927aa20ce38ddb0c40e6164f",
+      "bytes": 3151
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "00323abeade98945363ba528a6669bd538ea666982cae1a9390f1e6628faa991",
+      "bytes": 3169
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD002/rast_gru/test_predictions.csv",
+      "sha256": "1df80375c9623532d053ea063e9e194709cc7e3df8091ab2bf785bb764bcfdff",
+      "bytes": 8299
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "f75d8b39de550c9094c88d14efce976accdd08f79ce876f2a5fa718ae44dd471",
+      "bytes": 8297
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD003/rast_gru/test_predictions.csv",
+      "sha256": "98b34c4cd72fb15d72cc96508bc831d64201ffc54fcfb2618e3022a3a913e5b7",
+      "bytes": 3183
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "eddf84777b25a1d73ac8ee40f2cbcf5e53d18dea0505313486dd07dc6dfc35a4",
+      "bytes": 3175
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD004/rast_gru/test_predictions.csv",
+      "sha256": "3e2f7014bebc2b6093edf6bc202de8aa883fd5303d23d29a6f3317ba7ef2f2df",
+      "bytes": 7989
+    },
+    {
+      "path": "results/paper_main_v3_seed2026/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "461a1c3fc20448ad30ed34f280223e4207bee1e4fef938a1c2bb5abea1a5016e",
+      "bytes": 7965
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD001/rast_gru/test_predictions.csv",
+      "sha256": "70b1aacd6891b80ef189a71ae8a43dd2336589e93ebb89211431ca3147eb5c34",
+      "bytes": 3171
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD001/rast_gru_v2/test_predictions.csv",
+      "sha256": "aaa54390bc4e5da753f67f4ad5225ed818590afbc26a3b09fc252b90e9d3faab",
+      "bytes": 3165
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD002/rast_gru/test_predictions.csv",
+      "sha256": "9a29368d0e299b311b8978cde0a1961948e99ac6605a6aa80202da9d8d2fe0ca",
+      "bytes": 8291
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD002/rast_gru_v2/test_predictions.csv",
+      "sha256": "b7711c5bc0cf476d3a541417d3a370038c52174c31132bdccafce42af23aa3ac",
+      "bytes": 8292
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD003/rast_gru/test_predictions.csv",
+      "sha256": "8751aaa7ab4d92f1d7d0764643b6d92a015c1c8190176296b723a08a1d04590e",
+      "bytes": 3166
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD003/rast_gru_v2/test_predictions.csv",
+      "sha256": "71bd45589deb348502c30589156c138d7bdb1431f26296bdbfdd586baaf46a36",
+      "bytes": 3166
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD004/rast_gru/test_predictions.csv",
+      "sha256": "b00719c21f6a3fce91922349d3cb6d62d86bd0b3e51ce574e5d190526638490f",
+      "bytes": 7985
+    },
+    {
+      "path": "results/paper_main_v3_seed42/FD004/rast_gru_v2/test_predictions.csv",
+      "sha256": "f2ba9ac7846b627d6863d7cf971b1c2e58a683287207a9304f86bad86d72cc51",
+      "bytes": 8000
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/firewalled/test_labels_global.npz",
+      "sha256": "310cb764aff5a31df601748695d985359f41139ff5ce14a463c2abf7f511f2e9",
+      "bytes": 3009
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/firewalled/test_labels_temperature.npz",
+      "sha256": "310cb764aff5a31df601748695d985359f41139ff5ce14a463c2abf7f511f2e9",
+      "bytes": 3009
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/asym/seed_123.csv",
+      "sha256": "9fbe51f3c185ed2af7fde4e2ee4e5127f81c42da45401c4f5ef99fa30b25fbdf",
+      "bytes": 22718
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/asym/seed_2024.csv",
+      "sha256": "89bf3221d5f5b92d5eb859f45dd24df0e446ac1ec06913c46cb54832f35fc923",
+      "bytes": 23069
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/asym/seed_2025.csv",
+      "sha256": "b9ae6fde638237f5f5fd601fd6df6d1860b29c0c160c8e8ca38d12986270728c",
+      "bytes": 23251
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/asym/seed_2026.csv",
+      "sha256": "e2340e89fc32f0b2f2fd84783bcd783c1975bd153c89ef55ba267c6d62144145",
+      "bytes": 22990
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/asym/seed_42.csv",
+      "sha256": "b6cd911962d4ef9fe0abd7e5bda8b10cff55d703d18aa61683849c8d2a1d8811",
+      "bytes": 22314
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/core/seed_123.csv",
+      "sha256": "ffdb96ab64d1165aedf05f1457cdc67be7ad9a7429e6e325e09ae9837a185eff",
+      "bytes": 22714
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/core/seed_2024.csv",
+      "sha256": "07f7665a6468fd898f3a6d4dd7152ffa2d6ddd023267a2b868760d1ecdf55a08",
+      "bytes": 23096
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/core/seed_2025.csv",
+      "sha256": "dd013d744962672eb1f7e4dc85d187650d9c9c61be0004c0147b47ecdf40faf9",
+      "bytes": 22841
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/core/seed_2026.csv",
+      "sha256": "1bfe85c4e608b753880b0d5b5c525d49eb3a503d4d443e19495b23fef05e189f",
+      "bytes": 23072
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/global/core/seed_42.csv",
+      "sha256": "9423f9b6d9bb369d0af89452ac78726d481c105fb1611621e8805be2c7a8709e",
+      "bytes": 22210
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/asym/seed_123.csv",
+      "sha256": "1799366808ff8272bd33b6bb55ea77bb8e7fa8e47b244a406967a50b773e8dc8",
+      "bytes": 24514
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/asym/seed_2024.csv",
+      "sha256": "a4d726559c0585efb58e0516a1bb972d4c21ce9e3e9b70ba65f6809219b67cd5",
+      "bytes": 24870
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/asym/seed_2025.csv",
+      "sha256": "09ef5ba5c0dfff9c071f4fa94b93e58c65065b9afd1ceed6c0536613edf97850",
+      "bytes": 25241
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/asym/seed_2026.csv",
+      "sha256": "e2e7bb4236bb0dd7661483b5c3d44a80cca0eec8fea85e11134e238ad204f2be",
+      "bytes": 24872
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/asym/seed_42.csv",
+      "sha256": "3ea759a2850e3edffe224dd9458e0f6884d494aae81535c1743f68068e7cd47e",
+      "bytes": 24121
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/core/seed_123.csv",
+      "sha256": "9d5f52bc0103fa70fb04083709c2d6090986a3a07964f86c68db9dc6d5110376",
+      "bytes": 24475
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/core/seed_2024.csv",
+      "sha256": "df9c2ac9861aa4f0492be6044d230adac3213f476dfbe1f6fdeefda4b4eeaac5",
+      "bytes": 24891
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/core/seed_2025.csv",
+      "sha256": "c56db0bc2b300ec412d565d86f6636370464a435ee46c379857b92e46100d429",
+      "bytes": 25223
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/core/seed_2026.csv",
+      "sha256": "072e5ceef790d8d402dfceb1292fef9235a6f4f88f54c64cf534fa4380bd03e4",
+      "bytes": 24734
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/predictions/temperature/core/seed_42.csv",
+      "sha256": "7b7ee41cd36c1f03fdd9774722ef07f14ddaaaa1442bcc93c77edcdf9da86911",
+      "bytes": 24010
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/prepared/development_global.npz",
+      "sha256": "695fccfb978a3481c3987d89226460500ac5be444bd1d51adc6e5d961bfb9a2f",
+      "bytes": 14629
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/prepared/development_temperature.npz",
+      "sha256": "5fa8bde4a01b493c117bc05c001024b2713665d2e34b3d277cebe999c4e781b3",
+      "bytes": 14644
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/prepared/test_inputs_global.npz",
+      "sha256": "32455b582c1491af2cb0da163514d1ab67506f174bd7c1df14b9e9b05bfb0b07",
+      "bytes": 18142
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/prepared/test_inputs_temperature.npz",
+      "sha256": "d0bc8c2b7af95e2638f01aea5f61ad94f3f2f571d9c654c72199449151d0aae0",
+      "bytes": 18186
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/prepared/training_global.npz",
+      "sha256": "a331b99e7bebdc8243bc2e00ae3d5087fe088cbdd23440a5266bb906d68ed711",
+      "bytes": 34756
+    },
+    {
+      "path": "studies/prospective_battery_freeze_v1/prepared/training_temperature.npz",
+      "sha256": "c1125e026f8607ff31676a7175471503958746a6ed41edc8b00a5c2418e0eb71",
+      "bytes": 34728
+    }
+  ],
+  "outputs": [
+    {
+      "path": "paper_outputs/ress_major_revision/analysis_manifest.json",
+      "sha256": "af2cc332fc3953fe4633ddd533db979542ab307859a4bfcbd568e9757cfe95ef",
+      "bytes": 21167
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/analysis_timeline.csv",
+      "sha256": "ed07a35689b535678390fa41330f4a7ba26081c2796d7760a258a6e1b8d5023c",
+      "bytes": 1663
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/battery_exploratory_baselines.csv",
+      "sha256": "69f6e12ed92302ddd5f586a06dc94db86a299708d08e90099ed907c1121200b7",
+      "bytes": 1113
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/battery_index_definition_change.csv",
+      "sha256": "2aeef6c9346ca6d24ca96fec8dfbef97616d807ee0fe824ceba24ea5fde169ae",
+      "bytes": 5642
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/battery_index_definition_paired.csv",
+      "sha256": "d509752d931a9b5561f25ccea36b2bf257197fba72fecb635e094c382a158783",
+      "bytes": 28731
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/battery_index_definition_unit_level.csv",
+      "sha256": "3d8a321e60f7531a1b399769e667b7a405d9b956f871167465c2566d868cf514",
+      "bytes": 103725
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/battery_practical_equivalence.csv",
+      "sha256": "889c776b531da3aa07f7f0f91f9a5f7e14837f7d78269365eb9886e224def370",
+      "bytes": 1272
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/cmapss_practical_equivalence.csv",
+      "sha256": "fe08a94319100ab5a5bd3308e085b7b7066aa449cdc48aa2b876b45d2155ef44",
+      "bytes": 1039
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/maintenance_decision_cell_level.csv",
+      "sha256": "3551f993114fd60133b77668c9379e79b4e255106a08b47f5debcc79ae3837f2",
+      "bytes": 149403
+    },
+    {
+      "path": "paper_outputs/ress_major_revision/maintenance_decision_summary.csv",
+      "sha256": "475efe37f72636b040cb73cb5f50ae3ac6733608becfbb08f9e7f7f6a33db179",
+      "bytes": 5389
+    }
+  ],
+  "claim_boundary": "No output is confirmatory, a field-validated maintenance policy, a reliability probability, or an independent comparator-study result."
+}

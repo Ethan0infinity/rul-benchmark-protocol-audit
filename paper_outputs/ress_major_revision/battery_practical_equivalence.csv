@@ -1,0 +1,7 @@
+domain,contrast,metric,candidate_margin,finite_design_mean,within_margin_streams,negative_beyond_margin_streams,positive_beyond_margin_streams,total_streams,independent_test_units,status
+NASA battery,Battery-GRU-Asym minus Battery-GRU-Core,rmse,0.5,2.545544119134623,1,0,4,5,4,post-registration exploratory transparent band; streams are repeated fitting variations
+NASA battery,Battery-GRU-Asym minus Battery-GRU-Core,rmse,1.0,2.545544119134623,2,0,3,5,4,post-registration exploratory transparent band; streams are repeated fitting variations
+NASA battery,Battery-GRU-Asym minus Battery-GRU-Core,rmse,2.0,2.545544119134623,2,0,3,5,4,post-registration exploratory transparent band; streams are repeated fitting variations
+NASA battery,Battery-GRU-Asym minus Battery-GRU-Core,lpr,0.01,-0.07767379679144382,2,2,1,5,4,post-registration exploratory transparent band; streams are repeated fitting variations
+NASA battery,Battery-GRU-Asym minus Battery-GRU-Core,lpr,0.025,-0.07767379679144382,2,2,1,5,4,post-registration exploratory transparent band; streams are repeated fitting variations
+NASA battery,Battery-GRU-Asym minus Battery-GRU-Core,lpr,0.05,-0.07767379679144382,2,2,1,5,4,post-registration exploratory transparent band; streams are repeated fitting variations

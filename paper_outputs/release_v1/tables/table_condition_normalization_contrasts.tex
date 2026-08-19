@@ -1,0 +1,21 @@
+\begin{table*}[!t]
+\centering
+\scriptsize
+\caption{[RETROSPECTIVE SENSITIVITY; S-NORM-9] K-means minus matched normalization controls. Negative effects favor K-means. Nominal intervals, Holm$_9$, and exact five-seed sign-flip values are diagnostic sensitivity summaries; none is assigned a confirmatory role.}
+\label{tab:condition-normalization-contrasts}
+\begin{tabular}{llrrrr}
+\toprule
+Control & Metric & Mean $\Delta$ & Nominal interval & Holm$_9$ & Sign-flip \\
+\midrule
+Global standardization & RMSE & -11.809 & [-15.057, -8.709] & 0.001 & 0.062 \\
+Global standardization & NASA/engine & -41.840 & [-86.559, -18.155] & 0.245 & 0.062 \\
+Global standardization & LPR@30 & -0.140 & [-0.352, 0.057] & 1.000 & 0.250 \\
+Rounded official-state grouping & RMSE & 0.000 & [0.000, 0.000] & 1.000 & 1.000 \\
+Rounded official-state grouping & NASA/engine & 0.000 & [0.000, 0.000] & 1.000 & 1.000 \\
+Rounded official-state grouping & LPR@30 & 0.000 & [0.000, 0.000] & 1.000 & 1.000 \\
+Continuous condition correction & RMSE & -0.770 & [-1.904, 0.253] & 1.000 & 0.125 \\
+Continuous condition correction & NASA/engine & -0.469 & [-1.452, 0.539] & 1.000 & 0.250 \\
+Continuous condition correction & LPR@30 & 0.004 & [-0.094, 0.107] & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table*}

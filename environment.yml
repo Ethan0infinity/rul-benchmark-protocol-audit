@@ -1,0 +1,9 @@
+name: rul-benchmark-governance
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11.9
+  - pip
+  - pip:
+      - -r requirements.txt

@@ -1,0 +1,33 @@
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{Training-only sensor-ranking stability across 20 task--seed cells. Scores combine normalized variance (0.30), absolute Spearman correlation with capped RUL (0.40), and absolute Spearman correlation with cycle (0.30). Ties are resolved by ascending sensor number; the top 14 implement the fixed sensor-budget constraint.}
+\label{tab:feature-selection-stability}
+\begin{tabular}{lrrrr}
+\toprule
+Sensor & Selected cells & Frequency & Mean rank & Rank range \\
+\midrule
+s9 & 20/20 & 1.00 & 2.5 & 1--9 \\
+s4 & 20/20 & 1.00 & 2.8 & 1--4 \\
+s11 & 20/20 & 1.00 & 4.2 & 2--6 \\
+s13 & 20/20 & 1.00 & 4.5 & 1--13 \\
+s14 & 20/20 & 1.00 & 6.8 & 2--14 \\
+s3 & 20/20 & 1.00 & 7.2 & 6--10 \\
+s17 & 20/20 & 1.00 & 8.0 & 7--9 \\
+s8 & 20/20 & 1.00 & 9.2 & 5--13 \\
+s2 & 20/20 & 1.00 & 9.7 & 8--11 \\
+s15 & 19/20 & 0.95 & 9.3 & 5--15 \\
+s12 & 19/20 & 0.95 & 9.7 & 3--15 \\
+s7 & 19/20 & 0.95 & 10.2 & 4--16 \\
+s20 & 11/20 & 0.55 & 13.7 & 6--18 \\
+s10 & 10/20 & 0.50 & 13.7 & 9--19 \\
+s16 & 10/20 & 0.50 & 15.4 & 12--18 \\
+s21 & 6/20 & 0.30 & 13.5 & 7--18 \\
+s6 & 5/20 & 0.25 & 14.5 & 11--16 \\
+s18 & 1/20 & 0.05 & 17.4 & 14--19 \\
+s5 & 0/20 & 0.00 & 18.6 & 16--21 \\
+s19 & 0/20 & 0.00 & 19.7 & 18--21 \\
+s1 & 0/20 & 0.00 & 20.4 & 19--21 \\
+\bottomrule
+\end{tabular}
+\end{table}

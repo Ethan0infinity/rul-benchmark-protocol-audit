@@ -1,0 +1,28 @@
+\begin{table*}[!t]
+\centering
+\scriptsize
+\caption{Illustrative null calibration with five seed clusters. The crossed percentile and centered-bootstrap procedures are anti-conservative in these design-matched simulations, whereas the exact five-seed sign-flip test cannot attain a two-sided $p<0.05$ (minimum $0.0625$). These simulations diagnose small-cluster uncertainty; they do not validate any one procedure universally.}
+\label{tab:small-cluster-calibration}
+\begin{tabular}{rrllrr}
+\toprule
+Engines & Seed SD & Method & Quantity & Estimate & MCSE \\
+\midrule
+100 & 0.5 & crossed percentile & Coverage & 0.880 & 0.019 \\
+100 & 0.5 & product weighted percentile & Coverage & 0.860 & 0.020 \\
+100 & 0.5 & crossed centered & Type-I & 0.117 & 0.019 \\
+100 & 0.5 & exact seed signflip & Type-I & 0.000 & 0.000 \\
+100 & 1.0 & crossed percentile & Coverage & 0.863 & 0.020 \\
+100 & 1.0 & product weighted percentile & Coverage & 0.833 & 0.022 \\
+100 & 1.0 & crossed centered & Type-I & 0.133 & 0.020 \\
+100 & 1.0 & exact seed signflip & Type-I & 0.000 & 0.000 \\
+248 & 0.5 & crossed percentile & Coverage & 0.887 & 0.018 \\
+248 & 0.5 & product weighted percentile & Coverage & 0.873 & 0.019 \\
+248 & 0.5 & crossed centered & Type-I & 0.103 & 0.018 \\
+248 & 0.5 & exact seed signflip & Type-I & 0.000 & 0.000 \\
+248 & 1.0 & crossed percentile & Coverage & 0.843 & 0.021 \\
+248 & 1.0 & product weighted percentile & Coverage & 0.827 & 0.022 \\
+248 & 1.0 & crossed centered & Type-I & 0.133 & 0.020 \\
+248 & 1.0 & exact seed signflip & Type-I & 0.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table*}

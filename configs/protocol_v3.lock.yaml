@@ -1,0 +1,48 @@
+protocol_name: paper_main_v3
+protocol_version: "3.0"
+allowed_experiment_prefix: paper_main_v3_seed
+allowed_supplementary_prefixes:
+  - ablation_
+  - close_prior_
+  - design_sensitivity_
+  - independent_
+  - preference_
+  - factorial_
+  - lofo_
+  - crossed_
+  - cmapss_preprocess_
+forbidden_result_prefixes:
+  - archive_
+  - smoke
+  - quick
+required_selection_metric: val_last_risk_score
+required_validation_last_strategy: simulated
+required_scaler: condition_standard
+required_append_missing_mask: true
+required_metrics:
+  - test_rmse
+  - test_mae
+  - test_nasa_score
+  - test_critical_30_rmse
+  - test_critical_30_late_prediction_ratio
+  - test_critical_30_severe_late_10_ratio
+  - test_critical_50_rmse
+  - best_epoch
+  - best_epoch_val_all_loss
+  - best_checkpoint_score
+  - best_selection_score
+  - checkpoint_selection_metric
+  - completed_epochs
+  - planned_epochs
+  - augmentation_seed
+  - deterministic_training
+  - profiled_flops_batch1
+  - training_elapsed_sec
+  - peak_gpu_memory_mb
+  - protocol_name
+  - protocol_version
+  - result_status
+  - run_dir
+  - allowed_for_paper
+  - is_smoke
+  - is_archive

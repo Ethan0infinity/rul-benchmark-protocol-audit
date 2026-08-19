@@ -1,0 +1,10 @@
+comparison,comparator,metric,mean_difference,nominal_crossed_ci95_low,nominal_crossed_ci95_high,centered_bootstrap_p,bootstrap_p_mcse,exact_seed_signflip_p,bootstrap_repetitions,evidence_level,holm_adjusted_p_all9,decision
+kmeans minus global,global,rmse,-11.808760494840921,-15.05702793111056,-8.708947031990359,9.999000099990002e-05,9.998500187478128e-05,0.0625,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,0.0008999100089991002,crossed-Holm direction: lower K-means; exact five-seed unresolved
+kmeans minus global,global,nasa_per_engine,-41.84018735387142,-86.55864345475284,-18.15484494275394,0.030596940305969402,0.0017221440639419623,0.0625,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,0.24477552244775522,no adjusted evidence
+kmeans minus global,global,lpr30,-0.139622641509434,-0.35217391304347817,0.05714285714285716,0.17478252174782521,0.0037976199115012025,0.25,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence
+kmeans minus official_state,official_state,rmse,0.0,0.0,0.0,1.0,0.0,1.0,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence
+kmeans minus official_state,official_state,nasa_per_engine,0.0,0.0,0.0,1.0,0.0,1.0,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence
+kmeans minus official_state,official_state,lpr30,0.0,0.0,0.0,1.0,0.0,1.0,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence
+kmeans minus continuous,continuous,rmse,-0.7696632709703,-1.9036291762208577,0.2525571695434467,0.1496850314968503,0.0035674458114037266,0.125,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence
+kmeans minus continuous,continuous,nasa_per_engine,-0.46855788566213974,-1.451898658890423,0.5386897186121019,0.33186681331866813,0.0047085991614313205,0.25,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence
+kmeans minus continuous,continuous,lpr30,0.003773584905660371,-0.09362034574468088,0.10667241379310338,0.9498050194980502,0.002183361568009798,1.0,10000,RETROSPECTIVE NORMALIZATION SENSITIVITY,1.0,no adjusted evidence

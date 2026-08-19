@@ -1,0 +1,18 @@
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{Repeated FD004 forward-pass timing. GPU measurements use 50 warm-up and 200 synchronized timed iterations; CPU measurements use 20 warm-up and 100 timed iterations. Preprocessing and host--device transfer are excluded. Values summarize five independently trained checkpoints.}
+\label{tab:inference-latency-protocol}
+\begin{tabular}{lrlrrrr}
+\toprule
+Point & Params & Device & Batch & Median ms & Seed range & Median [p10,p90] \\
+\midrule
+OCM-Asym & 54,155 & CPU & 1 & 1.612 & [1.582, 1.999] & [1.389, 2.057] \\
+OCM-Asym & 54,155 & GPU & 1 & 1.886 & [1.584, 2.317] & [1.484, 2.295] \\
+OCM-Asym & 54,155 & GPU & 128 & 1.990 & [1.720, 2.159] & [1.603, 2.275] \\
+RAST-GRU & 87,568 & CPU & 1 & 1.658 & [1.610, 1.723] & [1.547, 1.839] \\
+RAST-GRU & 87,568 & GPU & 1 & 1.836 & [1.656, 2.076] & [1.511, 2.080] \\
+RAST-GRU & 87,568 & GPU & 128 & 1.868 & [1.574, 2.665] & [1.440, 2.484] \\
+\bottomrule
+\end{tabular}
+\end{table}

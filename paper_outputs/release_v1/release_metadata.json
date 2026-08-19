@@ -1,0 +1,16 @@
+{
+  "release_id": "fixed-benchmark-release-v1",
+  "schema_version": "release-evidence-v1",
+  "generated_utc": "2026-08-08T16:48:50.825328+00:00",
+  "source_of_truth": "paper_outputs/release_v1 is the compact C-MAPSS semantic layer only",
+  "historical_round_files": "retained outside the compact GitHub release; complete post-study evidence is archived on OSF",
+  "external_archive": {
+    "public_url": "https://osf.io/u76ze/",
+    "immutable_release": "RUL_Benchmark_Claim_Audit_Complete_Evidence_v1.zip",
+    "doi": "10.17605/OSF.IO/U76ZE",
+    "sha256": "48ffbbccf2e853243e2dd34b88a12ec6561bba0c325e43c5bfa91cf9e11fdfad",
+    "status": "publicly resolvable complete evidence archive"
+  },
+  "confirmatory_status": "none for the retrospective C-MAPSS layer; all inferential quantities are finite fixed-task estimates or diagnostics",
+  "manifest_sha256": "10ccede2aa8b5a44cc14197eb4cd09d856c17444c862c63a163ea303e159f9b2"
+}

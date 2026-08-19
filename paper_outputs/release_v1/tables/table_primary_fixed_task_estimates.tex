@@ -1,0 +1,27 @@
+\begin{table*}[!t]
+\centering
+\scriptsize
+\caption{Main result-informed fixed-benchmark OCM-Asym minus RAST-GRU estimates (family E-FIXED-12). The crossed bootstrap resamples five training-seed levels and matched engines independently within each fixed task. The pointwise interval, Holm$_{12}$ value, max-$t$ envelope, and exact sign-flip value are diagnostics rather than calibrated confirmatory procedures. The exact sign-flip calculation enumerates all $2^5$ signs and cannot attain a two-sided value below 0.0625.}
+\label{tab:primary-fixed-task-estimates}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrl}
+\toprule
+Task & Metric & Mean $\Delta$ & Diagnostic interval & Diagnostic max-$t$ envelope & Holm$_{12}$ diagnostic & Exact sign-flip diagnostic & LPR support \\
+\midrule
+FD001 & rmse & -0.806 & [-2.087, 0.453] & [-2.925, 1.312] & 1.000 & 0.250 & -- \\
+FD001 & nasa per engine & -0.537 & [-1.388, 0.136] & [-1.777, 0.702] & 1.000 & 0.125 & -- \\
+FD001 & lpr30 & -0.040 & [-0.219, 0.104] & [-0.305, 0.225] & 1.000 & 0.750 & $N_{30}=25$; O 0--4/R 0--8 \\
+FD002 & rmse & -0.260 & [-1.334, 0.855] & [-2.039, 1.519] & 1.000 & 0.500 & -- \\
+FD002 & nasa per engine & -0.619 & [-1.816, 0.333] & [-2.399, 1.162] & 1.000 & 0.188 & -- \\
+FD002 & lpr30 & -0.036 & [-0.152, 0.065] & [-0.216, 0.144] & 1.000 & 0.688 & $N_{30}=61$; O 3--8/R 1--16 \\
+FD003 & rmse & 0.664 & [-0.813, 1.937] & [-1.632, 2.960] & 1.000 & 0.250 & -- \\
+FD003 & nasa per engine & 0.982 & [-0.365, 3.139] & [-1.914, 3.879] & 1.000 & 0.188 & -- \\
+FD003 & lpr30 & 0.040 & [-0.072, 0.183] & [-0.171, 0.251] & 1.000 & 0.625 & $N_{30}=20$; O 1--6/R 1--5 \\
+FD004 & rmse & 0.893 & [-0.496, 2.073] & [-1.240, 3.027] & 1.000 & 0.250 & -- \\
+FD004 & nasa per engine & -1.241 & [-11.271, 1.576] & [-12.095, 9.614] & 1.000 & 1.000 & -- \\
+FD004 & lpr30 & -0.117 & [-0.215, -0.029] & [-0.270, 0.036] & 0.192 & 0.062 & $N_{30}=53$; O 7--17/R 15--23 \\
+\bottomrule
+\end{tabular}
+}
+\par\footnotesize LPR support reports the number of eligible engines and the five-seed event-count ranges for OCM-Asym (O) and RAST-GRU (R).
+\end{table*}

@@ -1,0 +1,19 @@
+\begin{table}[H]
+\centering
+\caption{Post-registration exploratory battery baselines under global training-only normalization.}
+\label{tab:battery-baselines}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.34\linewidth}rrrr}
+\toprule
+Estimator & Macro RMSE & Macro LPR$_{10\%}$ & Pooled late/eligible & Pooled frequency \\
+\midrule
+training-life-prior & 23.720 & 0.2500 & 8.0/48.0 & 0.1667 \\
+capacity-index-linear & 25.998 & 0.8824 & 40.0/48.0 & 0.8333 \\
+window-summary-ridge & 12.711 & 0.9773 & 47.0/48.0 & 0.9792 \\
+Battery-GRU-Core (five-stream mean) & 30.051 & 0.8610 & 40.8/48.0 & 0.8500 \\
+Battery-GRU-Asym (five-stream mean) & 32.596 & 0.7833 & 38.0/48.0 & 0.7917 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\linewidth}\footnotesize Notes: The three simple estimators were added after registration and do not enter the registered hypothesis or wording rule. GRU rows are five-training-stream means. LPR is an equal-battery macro average; pooled counts use 48 eligible windows per stream for the registered models and must not be reverse-calculated from macro LPR.\end{minipage}
+\end{table}

@@ -1,0 +1,17 @@
+\begin{table}[H]
+\centering
+\small
+\caption{Prospectively frozen NASA battery evaluation. Values are the mean and observed range over five registered training streams. Differences are Battery-GRU-Asym minus Battery-GRU-Core. Counts describe stream-level signs and are not inferential probabilities.}
+\label{tab:battery-primary}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Configuration/contrast & Macro RMSE (cycles) & LPR$_{10\%}$ & Direction support \\
+\midrule
+Battery-GRU-Core & 30.051 [21.299, 33.687] & 0.8610 [0.5172, 1.0000] & 5 streams \\
+Battery-GRU-Asym & 32.596 [22.166, 36.776] & 0.7833 [0.5909, 1.0000] & 5 streams \\
+\midrule
+Asym $-$ Core & +2.546 & -0.0777 & RMSE 0/0/5; LPR 2/2/1 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.96\linewidth}\footnotesize Direction support is negative/zero/positive. The four test batteries contribute equally within every stream. The registered rule classifies the joint result as an observed accuracy--late-overprediction trade-off.\end{minipage}
+\end{table}

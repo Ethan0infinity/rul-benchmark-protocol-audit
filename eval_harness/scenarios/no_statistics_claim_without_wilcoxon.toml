@@ -1,0 +1,3 @@
+id = "no_statistics_claim_without_wilcoxon"
+description = "Reject statistical-significance claims unless a Wilcoxon/statistical evidence table with p-value and effect size exists after claims are allowed."
+severity = "high"

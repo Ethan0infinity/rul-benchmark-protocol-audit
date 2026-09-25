@@ -1,0 +1,23 @@
+\begin{table}[!t]
+\centering
+\caption{Exploratory static maintenance-triage sensitivity for OCM-Asym minus RAST-GRU.}
+\label{tab:maintenance-decision}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{rrrrrr}
+\toprule
+RUL trigger threshold $h$ & Ratio $\rho$ & $\Delta C$/engine & Cost $-/0/+$ & Action disagree. & $\Delta$ false-late \\
+\midrule
+10 & 2 & +0.0017 & 8/4/8 & 0.0228 & -0.0011 \\
+10 & 5 & -0.0017 & 10/3/7 & 0.0228 & -0.0011 \\
+10 & 10 & -0.0073 & 11/3/6 & 0.0228 & -0.0011 \\
+20 & 2 & -0.0030 & 11/3/6 & 0.0178 & -0.0014 \\
+20 & 5 & -0.0072 & 11/2/7 & 0.0178 & -0.0014 \\
+20 & 10 & -0.0142 & 11/2/7 & 0.0178 & -0.0014 \\
+30 & 2 & +0.0033 & 4/8/8 & 0.0124 & +0.0002 \\
+30 & 5 & +0.0039 & 6/7/7 & 0.0124 & +0.0002 \\
+30 & 10 & +0.0048 & 7/6/7 & 0.0124 & +0.0002 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\linewidth}\footnotesize Notes: Service is triggered when predicted RUL is no greater than the declared RUL trigger threshold. Cost equals $C_L$ for a deferred action when true RUL is within the threshold and $C_E$ for premature service otherwise. Each summary gives an equal-weight mean over four tasks and five composite levels. Negative differences favor OCM-Asym. This is a post-result static decision sensitivity, not an optimized fleet policy, failure-probability model, or field utility estimate.\end{minipage}
+\end{table}

@@ -1,0 +1,3 @@
+name = "robustness_claim_check"
+category = "research-integrity"
+description = "Sensor-degradation robustness claims require global, window, block, and drift scenarios."

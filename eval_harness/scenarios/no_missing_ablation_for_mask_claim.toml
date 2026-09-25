@@ -1,0 +1,3 @@
+id = "no_missing_ablation_for_mask_claim"
+description = "Reject explicit missing-mask claims unless matching ablation evidence exists after claims are allowed."
+severity = "high"

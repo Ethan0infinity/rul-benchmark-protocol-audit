@@ -1,0 +1,3 @@
+name = "no_robustness_claim_without_robustness_csv"
+category = "research-integrity"
+description = "Sensor-degradation robustness claims require robustness.csv/json evidence with all required scenarios."

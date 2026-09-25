@@ -429,6 +429,13 @@ def build_timeline() -> pd.DataFrame:
             ("2026-08-16", "Source provenance correction verified in v5.3.1", "Git tag v5.3.1 and repository history", "corrected source snapshot; does not alter evidence timing"),
             ("2026-08-16", "RESS major-revision exploratory analyses generated", "major-revision evidence generator", "post-result maintenance, equivalence, baseline, and target-definition sensitivities"),
             ("2026-08-16", "RESS submission object rebuilt", "Git tag v5.4.0 and submission_identity.json", "release synchronization and journal-format revision; no evidence-status upgrade"),
+            ("2026-08-16", "v5.4.0-p1 local submission-layer patch assembled", "submission patch record", "abstract reduced to journal limit; manifest self-hash corrected; selected-grid transcription repaired; no scientific result changed"),
+            ("2026-08-17", "v5.4.0-p2 local submission-compliance patch assembled", "submission patch record", "corresponding-author contact completed; OSF dataset citation and vector Figure 5 added; no scientific result changed"),
+            ("2026-08-17", "v5.4.0-p3 privacy-safe submission patch assembled", "submission patch record", "residential contact isolated to confidential Editorial Manager metadata; public source scrubbed; no scientific result changed"),
+            ("2026-08-20", "v5.4.0-p4 final migration-alignment patch assembled", "submission patch record and migrated GitHub repository", "migrated GitHub tag resolved to b48c7e302cb0465f1e827a4b427415e2f3b7195b; repository URL/identity synchronized; figure/table text citations and evidence-manifest chronology repaired; no scientific result changed"),
+            ("2026-08-20", "v5.4.0-p5 submission-documentation and compatibility patch assembled", "submission patch record", "disclosure wording and document metadata normalized; no scientific result changed"),
+            ("2026-09-12", "v5.4.0-p6-readability readability revision assembled", "submission patch record", "abstract, introduction, section openings, discussion, and conclusion restructured for broad reliability-engineering readability; scientific result changed: no"),
+            ("2026-09-12", "v5.4.0-p7-editorial-polish editorial-polish revision assembled", "submission patch record", "title, abstract, front-loaded terminology, section headings, captions, and submission-facing descriptions polished for editor readability; scientific result changed: no"),
         ],
         columns=["date_or_period", "event", "source_record", "evidence_status"],
     )

@@ -1,0 +1,3 @@
+id = "dataset_integrity_claim_check"
+description = "Require validation report, checksums, and sufficiency report when docs claim validated or canonical data integrity."
+severity = "high"

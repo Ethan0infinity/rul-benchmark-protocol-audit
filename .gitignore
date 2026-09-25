@@ -4,69 +4,29 @@ __pycache__/
 .mpl_cache/
 .idea/
 .vscode/
-data/raw/*
-!data/raw/README.md
-/data/**
-!/data/README.md
-replication_package/
-release_verification/
+
+# Raw source datasets are obtained from their official providers.
+/data/raw/*
+!/data/raw/README.md
+/data/cmapss/**
+/data/ncmapss/**
+
+# Local model checkpoints and generated run trees are distributed via OSF.
 /results/**
 !/results/README.md
-/paper_outputs/**
-!/paper_outputs/release_v1/
-!/paper_outputs/release_v1/**
-!/paper_outputs/ress_major_revision/
-!/paper_outputs/ress_major_revision/**
+/paper_outputs/full_5x10_crossing/**
+/paper_outputs/ress_major_revision/raw/**
+/data_README.md
 
-# The GitHub repository is intentionally a minimal reproducible source profile.
-# The complete evidence tree is archived in the public OSF evidence release.
-/benchmark/
-/docs/
-/eval_harness/
-/manuscript/
-/papers/
-/reports/
-/supplementary_manuscript/
-/templates/
-/tests/
-
-/configs/**
-!/configs/default.yaml
-!/configs/paper_main.yaml
-!/configs/protocol_v3.lock.yaml
-
-/scripts/**
-!/scripts/download_cmapss.py
-!/scripts/validate_data.py
-!/scripts/train.py
-!/scripts/run_paper_experiments.py
-!/scripts/run_formal_benchmark.py
-!/scripts/check_benchmark_readiness.py
-!/scripts/build_paper_tables.py
-!/scripts/verify_installation.py
-!/scripts/build_ress_major_revision_evidence.py
-!/scripts/prepare_comparator_study.py
-
-# Study-ready comparator materials contain schemas only; no participant data.
-!/studies/
-!/studies/six_link_comparator_study/
-!/studies/six_link_comparator_study/**
-
-# Archive-only root assets are retained in the complete OSF evidence package.
-/Dockerfile
-/Dockerfile.texlive2026
-/PUBLIC_ARTIFACT_RELEASE_CHECKLIST.md
-/README_REPLICATION.md
-/README_REVISED.md
-/author_metadata.json
-/references.bib
-/reproduce_all.ps1
-/reproduce_all.sh
-/reproduce_minimal.ps1
-/reproduce_minimal.sh
-/reproduce_release_only.ps1
-/reproduce_release_only.sh
-/results_manifest.csv
-/supplementary_results_manifest.csv
-/tex_environment.lock
-/texlive.profile
+# Local LaTeX build files; keep the final PDFs and all TeX inputs.
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.spl
+*.synctex.gz
+*.toc
+*.xdv

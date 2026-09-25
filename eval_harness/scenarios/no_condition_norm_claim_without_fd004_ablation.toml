@@ -1,0 +1,3 @@
+id = "no_condition_norm_claim_without_fd004_ablation"
+description = "Reject condition-normalization claims unless FD004 no-condition-normalization ablation evidence exists after claims are allowed."
+severity = "high"

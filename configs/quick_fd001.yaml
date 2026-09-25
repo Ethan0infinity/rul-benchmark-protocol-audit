@@ -1,0 +1,58 @@
+project:
+  name: rs_tcn_gru_rul_quick
+  seed: 42
+  results_dir: results
+
+data:
+  root: data/raw
+  subsets: [FD001]
+  subset: FD001
+  rul_cap: 125
+  window_size: 30
+  stride: 1
+  validation_split: 0.2
+  scaler: standard
+  feature_mode: selected
+  max_selected_sensors: 12
+  include_settings: true
+
+model:
+  name: rast_gru
+  hidden_size: 48
+  tcn_channels: [32, 48]
+  kernel_size: 3
+  dropout: 0.15
+
+training:
+  epochs: 8
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  patience: 4
+  num_workers: 0
+  device: auto
+  loss: weighted_huber
+  huber_delta: 1.0
+  late_life_threshold: 30
+  late_life_weight: 1.5
+
+progress:
+  console: true
+  batch_bar: true
+
+augmentation:
+  mechanism_apply_probability: 1.0
+  corrupted_window_probability: 1.0
+  profile: missing_noise_drift
+  train_sensor_dropout_prob: 0.25
+  train_sensor_dropout_fraction: 0.12
+  train_noise_std: 0.01
+  train_missing_rate: 0.10
+  train_block_missing_rate: 0.08
+  train_drift_rate: 0.03
+
+robustness:
+  noise_levels: [0.0, 0.03, 0.05]
+  missing_rates: [0.0, 0.20, 0.40]
+  block_missing_rates: [0.20]
+  drift_rates: [0.05]

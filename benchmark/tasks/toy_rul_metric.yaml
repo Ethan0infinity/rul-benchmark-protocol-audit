@@ -1,0 +1,8 @@
+name: toy_rul_metric
+purpose: Recompute RMSE, MAE, NASA score, and critical-zone metrics from deterministic toy arrays.
+expected_checks:
+  - rmse
+  - mae
+  - nasa_score
+  - critical_30_count
+  - critical_30_late_prediction_ratio

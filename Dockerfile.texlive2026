@@ -1,0 +1,32 @@
+FROM python:3.11.9-slim-bookworm
+
+ARG TL_REPOSITORY=https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2026/tlnet-final
+ENV PATH=/opt/texlive/2026/bin/x86_64-linux:${PATH}
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    fontconfig \
+    make \
+    perl \
+    tar \
+    wget \
+    xz-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY texlive.profile /tmp/texlive.profile
+RUN wget -q "${TL_REPOSITORY}/install-tl-unx.tar.gz" -O /tmp/install-tl.tar.gz \
+    && mkdir /tmp/install-tl \
+    && tar -xzf /tmp/install-tl.tar.gz -C /tmp/install-tl --strip-components=1 \
+    && /tmp/install-tl/install-tl \
+       -profile /tmp/texlive.profile \
+       -repository "${TL_REPOSITORY}" \
+    && rm -rf /tmp/install-tl /tmp/install-tl.tar.gz
+
+WORKDIR /workspace
+COPY requirements.txt /workspace/requirements.txt
+RUN python -m pip install --no-cache-dir --upgrade pip \
+    && python -m pip install --no-cache-dir -r /workspace/requirements.txt
+
+COPY . /workspace
+ENV PYTHONPATH=/workspace/src
+CMD ["bash"]

@@ -1,0 +1,3 @@
+﻿name: fd001_smoke_baseline
+purpose: Optional 2-epoch FD001 smoke benchmark for the training pipeline.
+command: python scripts\train.py --config configs\quick_fd001.yaml --epochs 2 --no-batch-bar

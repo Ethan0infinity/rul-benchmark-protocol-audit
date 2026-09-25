@@ -1,0 +1,46 @@
+\input{generated/numbers.tex}
+\FloatBarrier
+\section{实验结果}
+
+\subsection{[主要冻结证据] 固定任务的精度与晚高估}
+
+冻结后报告的主要比较是在四个 C-MAPSS 官方测试发动机端点任务上计算 OCM-Asym 减 RAST-GRU。每个复合种子预测同一组官方发动机，因此训练种子与发动机 ID 是交叉因子。修订后的推断分别抽取复合种子水平和匹配发动机 ID，并把同一发动机抽样应用于所有入选种子；跨种子重复出现的发动机结果不再被当作独立观测。
+
+描述性均值仍体现精度--晚高估交换：相对 RAST-GRU，OCM-Asym 使等任务宏平均 RMSE 从 14.989 变为 15.112 cycles、NASA/engine 从 4.418 变为 4.064、LPR@30 从 0.176 变为 0.137。然而，覆盖全部 12 个主要检验的一次 Holm 校正后，没有对照通过。FD004 LPR@30 的名义交叉 95\% 区间低于零，但 Holm$_{12}$ 值为 0.192、max-$t$ 校正值为 0.174，五种子精确符号翻转值为 0.0625。因此它仅是提示性效应量，不是确认性证据。完整名义/同时区间、有限 bootstrap 精度和符号翻转结果见补充材料。
+
+\begin{figure*}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_round3_primary_simultaneous_forest}
+\caption{[主要冻结证据] 四个固定任务上的 OCM-Asym 减 RAST-GRU。蓝色为名义交叉 95\% 区间，较宽灰条为覆盖全部 12 个主要对照的 max-$t$ 同时 95\% 区间；负值支持 OCM-Asym。没有对照通过 Holm$_{12}$，不能只按名义区间方向作决策。}
+\label{fig:round3-primary-crossed-zh}
+\end{figure*}
+\FloatBarrier
+
+\subsection{[冻结后敏感性] 预测误差偏好}
+
+OCM-Core 与 OCM-Asym 使用相同架构和训练协议，仅晚高估误差 multiplier 不同。Core 的宏平均 RMSE 更低（14.732 对 15.112 cycles）；Asym 的 NASA/engine（4.064 对 4.530）、LPR@30（0.137 对 0.159）和晚误差 CVaR$_{0.95}$（3.999 对 4.577）更低，但相应宏平均配对区间均跨 0。它们是研究者设定的预测误差运行点，不是维修策略决策，也不是经独立数据选择的最优点。
+
+\input{generated/table_core_asym_cmapss_zh.tex}
+
+LPR 结论不只依赖浮点数正误差判定。交叉敏感性网格覆盖 $\epsilon\in\{0,0.5,1,2,5\}$ cycles 与 $\tau\in\{20,30,40,50\}$。在 FD004、$\tau=30$ 时，OCM-Asym 减 RAST-GRU 的均值从 $\epsilon=0$ 的 $-0.117$ 变为 $\epsilon=5$ 的 $-0.038$，容差增大后区间更趋于未解决。一次 Holm 校正覆盖完整 80 单元网格，并为每个单元报告 eligible 发动机数与晚事件数。无事件时，条件正尾严重度标记为未定义；零膨胀平均晚高估则继续在全部 eligible 发动机上定义。因此 LPR 必须结合事件支持与幅度解释。完整记录为 \texttt{round3\_endpoint\_sensitivity.csv} 和 \texttt{round3\_late\_event\_counts.csv}。
+
+\subsection{[冻结后敏感性] 归一化空间扰动}
+
+压力测试交叉五个训练种子、五个扰动种子和相同的 248 台 FD004 测试发动机。修订后的推断独立重采样三个因子水平，同时维持运行点之间匹配的发动机与扰动身份。一个联合 Holm 家族覆盖两个 OCM 运行点、九类扰动和三个声明指标，共 54 项。
+
+\input{generated/table_round2_stress_holm_zh.tex}
+
+联合校正后，没有对照支持 OCM 响应更低；3 个平均晚超量对照支持 RAST-GRU 更低，其余 51 项未解决。未校正方向计数和热图颜色不再承担支持性结论。完整效应量、交叉区间、中心化 bootstrap 值、校正 $p$ 值和状态标签存于 \texttt{round2\_stress\_crossed\_holm.csv}。由于扰动在归一化后施加，本节只评价算法对归一化空间扰动的敏感性，不评价物理传感器故障或部署鲁棒性。
+
+\subsection{[探索性] 协议、迁移与表征审计}
+
+其余分析用于限定而非扩展主要结论。FD002 未确认 FD004 的晚高估频率模式：其 RMSE、NASA/engine 和 LPR 对照均未解决，仅一个非对称误差效用对照通过独立的 20 项 Holm 家族。固定 N-CMAPSS DS02 任务只有三个官方测试 unit；仅验证集规则选择 $K=4$，而观察到的测试 RMSE 最优值在 $K=8$，故只将其作为单任务失败分析，不作为跨数据集确认。
+
+工况归一化移除了大部分可线性解码的工况信息，也是最强 removal ablation；$K$-means 在该基准上恰好恢复了取整后的六状态 setting 划分。新增 FD004 匹配对照在相同五种子和 OCM-Asym 协议下比较全局缩放、官方状态取整分组、$K$-means 分组与连续 setting 校正，用于识别构造敏感性，但不把任一分组视为物理真实状态或重新调优的主模型。可靠性和注意力输出也只作为表征诊断；现有定位与校准数值不足以证明物理故障检测或因果机制。
+
+\input{generated/table_condition_normalization_controls.tex}
+
+全局标准化的描述性表现明显较差（RMSE $28.133\pm1.677$）。官方状态取整分组与 $K$-means 在每个种子上产生完全相同的预测（RMSE $16.324\pm0.572$，NASA/engine $5.480\pm0.321$，LPR@30 $0.226\pm0.075$），原因是这些训练核心上的 $K$-means 划分与取整六状态划分一致。连续校正接近但相对 $K$-means 未解决（RMSE $17.094\pm0.630$）。$K$-means 对全局缩放的 RMSE 交叉-Holm 方向值为 $p=0.0009$，但五种子精确符号翻转受限于 0.0625；结合小簇校准和锁定后属性，本文不把它升级为确认性结论。可支持的解释是 FD004 上按工况缩放很重要，但没有识别出无监督聚类相对已知状态分组的特殊优势。
+
+两个 TCN-GRU 单元满足冻结的 RMSE $>50$ cycles 诊断标记。保留它们时，TCN-GRU 在 RMSE、NASA/engine 和 LPR 上的平均秩为 10.20、9.05 和 6.20；仅排除标记单元后变为 9.89、8.61 和 5.61。整体基准背景变化有限，但该失稳仍说明架构与检查点规则不兼容。完整消融、端点设计、协议构建、官方代码派生对照、运行时审计、tidy 行级输出和 schema 均移至补充材料和复现包。
+\FloatBarrier

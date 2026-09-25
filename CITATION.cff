@@ -1,26 +1,20 @@
 cff-version: 1.2.0
-title: "Benchmark-Claim Traceability and Maintenance-Decision Sensitivity for Remaining-Useful-Life Evaluation: Two Worked Studies"
+title: "Protocol Sensitivity in Remaining-Useful-Life Model Comparisons: Retrospective C-MAPSS Analysis and a Pre-Outcome-Frozen Battery Study"
 message: "If you use this code or reproducibility artifact, please cite the software release and complete evidence archive."
 type: software
 authors:
   - family-names: "Liu"
     given-names: "Zhihao"
-    orcid: "https://orcid.org/0009-0009-2497-0689"
-version: "5.4.0"
-date-released: "2026-08-16"
+version: "5.5.0"
+date-released: "2026-09-26"
 license: MIT
 repository-code: "https://github.com/Ethan0infinity/rul-benchmark-protocol-audit"
-url: "https://github.com/Ethan0infinity/rul-benchmark-protocol-audit"
-identifiers:
-  - type: doi
-    value: "10.17605/OSF.IO/U76ZE"
-    description: "Related complete evidence archive; this DOI does not identify the software release itself."
-abstract: "Source code and compact evidence for two worked RUL claim-traceability studies. The release adds post-result practical-equivalence bands, static maintenance-decision sensitivity, exploratory battery baselines, target-index sensitivity, an explicit analysis timeline, and an unexecuted independent comparator-study protocol. It does not establish model superiority, field reliability, optimized maintenance utility, or reporting-template efficacy."
+url: "https://osf.io/u76ze/"
+abstract: "Code accompanying a retrospective four-task C-MAPSS comparison and a battery study with a protocol fixed before training and test-label evaluation. The C-MAPSS analysis uses a pre-aggregation lock, not preregistration. Results do not establish a universal model winner or field maintenance benefit."
 keywords:
   - remaining useful life
   - C-MAPSS
   - battery aging
   - benchmark audit
-  - preregistration
   - reproducibility
-  - maintenance decision sensitivity
+  - protocol sensitivity

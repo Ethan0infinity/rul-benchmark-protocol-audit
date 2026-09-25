@@ -1,0 +1,3 @@
+id = "no_critical_zone_claim_without_table"
+description = "Reject critical-zone, near-failure, or safety-critical claims unless a critical-zone evidence table exists after claims are allowed."
+severity = "high"

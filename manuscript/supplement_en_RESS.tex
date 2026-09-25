@@ -1,0 +1,321 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,longtable,array,graphicx,float,placeins,siunitx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\sisetup{detect-all}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thesubsection}{S\arabic{section}.\arabic{subsection}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3.0em}}
+\makeatother
+\newcommand{\bestgraphic}[2][]{\IfFileExists{#2.pdf}{\includegraphics[#1]{#2.pdf}}{\includegraphics[#1]{#2.png}}}
+
+\title{Supplementary Information\\Protocol Sensitivity in Remaining-Useful-Life Model Comparisons: Retrospective C-MAPSS Analysis and a Pre-Outcome-Frozen Battery Study}
+\author{Zhihao Liu\\\small Independent Researcher, China}
+\date{}
+
+\begin{document}
+\input{generated/release_sync.tex}
+\InputIfFileExists{generated/submission_identity.tex}{}{%
+  \newcommand{\EvidenceTaggedCommit}{recorded in submission_identity.json}%
+  \newcommand{\EvidenceTagTree}{recorded in submission_identity.json}%
+  \newcommand{\EvidenceSourceContentCommit}{recorded in submission_identity.json}%
+  \newcommand{\EvidenceRepositoryURL}{https://github.com/Ethan0infinity/rul-benchmark-protocol-audit}%
+  \newcommand{\EvidenceTaggedCommitShort}{see submission identity record}%
+  \newcommand{\EvidenceTagTreeShort}{see submission identity record}%
+  \newcommand{\EvidenceSourceContentCommitShort}{see submission identity record}%
+  \newcommand{\EvidenceManuscriptHash}{generated at release build}%
+  \newcommand{\EvidenceSupplementHash}{generated at release build}%
+}
+\maketitle
+
+\noindent\textbf{Evidence identity.} The source release is identified by the annotated GitHub tag \texttt{\EvidenceSourceReleaseTag}; its resolved tag, commit, and tree hashes are recorded in the external submission identity record. The v5.5.0 evidence archive is publicly available as a version-named file in the OSF project at \url{https://osf.io/download/6ab6a6735205d2cb18154961/}. Its SHA-256 is \nolinkurl{A390CA0216E9CA1238420CA3F76AAFDF536A18B07D1B0FF2631FAA7FDF50566B}. This is a public project file, not a new OSF registration or immutable version DOI. The final PDF hashes are listed in the same identity record; the OSF archive hash identifies the evidence ZIP, not the compiled PDFs.
+
+\tableofcontents
+\clearpage
+
+\section{Scope, direction convention, and evidence vocabulary}
+
+Every difference is first named configuration minus second named configuration. Negative values favor the first configuration for RMSE, NASA/engine, late-prediction ratios, and normalized maintenance-decision cost. ``Completed levels'' are fixed study objects, not draws from a defined population. ``Diagnostic'' means that an output describes the completed design without calibrated confirmatory coverage or a prospective decision role. Table~\ref{tab:evidence-vocabulary} defines the evidence vocabulary used in this concise Supplement.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Evidence vocabulary used in both documents.}
+\label{tab:evidence-vocabulary}
+\begin{tabular}{@{}p{0.24\textwidth}p{0.31\textwidth}p{0.36\textwidth}@{}}
+\toprule
+Term & Operational meaning & Prohibited interpretation \\
+\midrule
+Fixed-task estimate & Paired mean and sign pattern over five completed coupled levels & Population effect, confirmatory test, or architecture main effect \\
+Sensitivity & Observed direction, magnitude, or support over declared post-result choices & Prevalence over all defensible protocols \\
+Diagnostic envelope & Resampling visualization of the completed design & Calibrated 95\% confidence interval \\
+Prospectively frozen worked audit & Battery protocol timestamped before training and test-label evaluation & Independent-team replication or model superiority \\
+Static RUL trigger threshold & Service/no-service mapping under declared RUL trigger threshold and cost grids & Optimized policy, monetary utility, or system reliability \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Traceability scaffold and neighboring reporting frameworks}
+
+The six-part traceability scaffold is supporting infrastructure for the protocol-sensitivity analysis, not a validated intervention or replacement for existing reporting frameworks. REFORMS is a consensus checklist for ML-based science \citep{Kapoor2024REFORMS}; Model Cards document model-level intended use and evaluation \citep{Mitchell2019ModelCards}; Eval Factsheets organize evaluation documentation \citep{Bordes2025EvalFactsheets}; and Evaluation Cards provide an interpretive evaluation-reporting layer with large-scale deployment evidence \citep{Ghosh2026EvaluationCards}. Chen et al.'s Evidence-Ledger Adjudication links claims to evidence packets and support relations for AI-assisted writing \citep{Chen2026EvidenceLedger}; its unit is a claim-verification packet, not an RUL benchmark comparison or protocol-sensitivity record. The present study has no independent comparative-effect result for the scaffold. Table~\ref{tab:construct-map} maps its fields to neighboring reporting frameworks without claiming superiority.
+
+Figure~\ref{fig:supp-traceability} shows the scaffold, and Table~\ref{tab:supp-sixpart} defines its six operational fields.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\caption{Construct map. ``Explicit'' describes a named field, not evidence that the format is superior.}
+\label{tab:construct-map}
+\begin{tabular}{@{}p{0.17\textwidth}p{0.18\textwidth}p{0.17\textwidth}p{0.19\textwidth}p{0.20\textwidth}@{}}
+\toprule
+Framework & Primary object & Design timing & Provenance & Claim/wording constraint \\
+\midrule
+Six-part traceability scaffold & Individual benchmark claim & Explicit field & Explicit artifact field & Explicit permitted-wording field; efficacy untested \\
+REFORMS & ML-based scientific study & Study-design recommendations & Computational-reproducibility module & Scope, metric, and limitation guidance \\
+Evaluation Cards & Evaluation record and reader interpretation & Timing-relevant metadata & Central interpretive signal & Reader modes and comparability signals \\
+Eval Factsheets & Evaluation documentation object & Context and procedure fields & Documentation-centered & Interpretive documentation across five dimensions \\
+Evidence-Ledger Adjudication & Claim/evidence packet & Per-claim adjudication & Evidence packet and support relation & Routes unsupported, contradicted, or mixed claims for review \\
+Model Cards & Trained model report & Training/evaluation procedure & Model/version record & Intended use, limitations, and disaggregated evaluation \\
+Preregistration & Study plan & Central purpose & Immutable pre-outcome plan & Constrains post-result interpretation indirectly \\
+Multiverse reporting & Analysis-choice distribution & Prospective or retrospective & Implementation-dependent & Exposes completed specification behavior \\
+\bottomrule
+\end{tabular}
+\end{table}
+\setlength{\tabcolsep}{6pt}
+
+\begin{figure}[H]
+\centering
+\bestgraphic[width=0.90\linewidth]{figures/round19_governance_workflow}
+\caption{Six-part traceability scaffold used as supporting documentation for the protocol-sensitivity analyses. The scaffold records comparison unit, design timing, evidence support, artifacts, completed sensitivities, and warranted wording; it does not upgrade the underlying evidence.}
+\label{fig:supp-traceability}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Operational fields in the six-part traceability scaffold.}
+\label{tab:supp-sixpart}
+\begin{tabular}{@{}p{0.24\textwidth}p{0.67\textwidth}@{}}
+\toprule
+Field & Required content \\
+\midrule
+Comparison and unit & Quantity, direction, aggregation rule, and independent evaluation unit. \\
+Design timing & When consequential choices were fixed and whether outcomes had already been inspected. \\
+Evidence support & What the completed design can support without upgrading diagnostics to population inference. \\
+Artifacts & Resolvable data rows, code, manifests, stable identifiers, and hashes needed to inspect the claim. \\
+Completed sensitivities & Adverse, null, mixed, and reversing outcomes, reported together with their scale. \\
+Claim wording & The strongest sentence warranted by the preceding five fields, without unsupported superiority or practical-benefit claims. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{C-MAPSS finite-design evidence}
+
+FD004 is development-informed because it supplied the original preference-development split. The statistical unit for endpoint comparisons is the matched official test engine; the five composite levels jointly change split, initialization, shuffle, and augmentation.
+
+The archived raw files used for FD004 contain 249 unique training-unit identifiers and 248 test-unit identifiers. Their SHA-256 hashes are \nolinkurl{27ef6160b6a1dcb2613a88de9c239f763b223f02cdc41dc5cdedc5dc189b6218} (\texttt{train\_FD004.txt}) and \nolinkurl{1dc675fff0624bac10786927c6715b37d1297657137400d2b1a3138d777a3ba5} (\texttt{test\_FD004.txt}); both match the corresponding files inside the archived \texttt{CMAPSSData.zip} (SHA-256 \nolinkurl{74bef434a34db25c7bf72e668ea4cd52afe5f2cf8e44367c55a82bfd91a5a34f}). NASA's current Open Data landing page reports 248 training and 249 test trajectories \citep{NASA_CMAPSS_OpenData}. The experiments use the archived local files identified by these hashes.
+
+\input{generated/table_primary_fixed_task_effects_only.tex}
+\input{generated/table_lpr30_event_support.tex}
+
+\section{Full split--stream crossing}
+
+The 400-run extension pairs five split levels with ten training streams for each of four tasks and two complete configurations. Each task therefore has 50 matched split--stream cells and one estimate per cell. The formal execution began before the plan and Amendment 01 were frozen on 22 September 2026. The lock is pre-aggregation, not pre-execution preregistration. The complete aggregate was generated after the 400-row manifest was checked and hashed. All rows used validation last-risk-score checkpoint selection, an 80-epoch cap, and patience 12. The 400 runs stopped by the declared early-stopping rule between epochs 13 and 61; each history reached the patience condition and retained its selected checkpoint.
+
+The heatmaps below show cell-level contrasts as OCM-Asym minus RAST-GRU. Negative cells favor OCM-Asym for the displayed error endpoint. Rows are split levels and columns are training streams. Each panel shows the finite design, not a sample from a split or stream population.
+
+\begin{figure}[H]\centering
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD001_rmse}\\[-1mm]{\small FD001}\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD002_rmse}\\[-1mm]{\small FD002}\end{minipage}\\[2mm]
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD003_rmse}\\[-1mm]{\small FD003}\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD004_rmse}\\[-1mm]{\small FD004}\end{minipage}
+\caption{RMSE contrasts across the 5-by-10 crossing.}
+\label{fig:supp-crossing-rmse}
+\end{figure}
+
+\begin{figure}[H]\centering
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD001_nasa_per_engine}\\[-1mm]{\small FD001}\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD002_nasa_per_engine}\\[-1mm]{\small FD002}\end{minipage}\\[2mm]
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD003_nasa_per_engine}\\[-1mm]{\small FD003}\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD004_nasa_per_engine}\\[-1mm]{\small FD004}\end{minipage}
+\caption{NASA/engine contrasts across the 5-by-10 crossing.}
+\label{fig:supp-crossing-nasa}
+\end{figure}
+
+\begin{figure}[H]\centering
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD001_lpr30}\\[-1mm]{\small FD001}\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD002_lpr30}\\[-1mm]{\small FD002}\end{minipage}\\[2mm]
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD003_lpr30}\\[-1mm]{\small FD003}\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD004_lpr30}\\[-1mm]{\small FD004}\end{minipage}
+\caption{LPR@30 contrasts across the 5-by-10 crossing.}
+\label{fig:supp-crossing-lpr}
+\end{figure}
+
+\input{generated/table_full_5x10_finite_design.tex}
+\input{generated/table_full_5x10_lpr_event_support.tex}
+\input{generated/table_full_5x10_rank_support.tex}
+
+\section{Endpoint roles and development relations}
+
+The main text distinguishes target-monitored endpoints from independent downstream validation signals. Table~\ref{tab:endpoint-role} records how the reported quantities relate to training and checkpoint selection. Reporting an endpoint on held-out test engines does not make it independent of model development or checkpoint selection.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Endpoint-role map used to constrain interpretation.}
+\label{tab:endpoint-role}
+\begin{tabular}{@{}p{0.18\textwidth}p{0.25\textwidth}p{0.21\textwidth}p{0.23\textwidth}@{}}
+\toprule
+Endpoint & Training-objective relation & Checkpoint relation & Permitted interpretation \\
+\midrule
+RMSE & Aligned with point-error accuracy & Direct component of $S_{\mathrm{val}}$ & Target-monitored accuracy, not an independent endpoint \\
+LPR@30, SLPR@30,10 & Thirty-cycle life weighting is shared; OCM adds a smooth near-failure positive-error term & Direct components of $S_{\mathrm{val}}$ & Target-conditioned near-failure-overestimation endpoints \\
+NASA/engine & Not directly optimized & Not in $S_{\mathrm{val}}$ & Out-of-target asymmetric-error sensitivity \\
+Alternative $\tau$ or positive $\epsilon$ & Related to, but not identical to, the 30-cycle target & Not in $S_{\mathrm{val}}$ & Threshold or tolerance sensitivity \\
+ZIMLE, CMLE, CVaR, $A_\kappa$ & Objective-adjacent error summaries & Not in $S_{\mathrm{val}}$ & Descriptive magnitude/tail sensitivity, not maintenance utility \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Magnitude and maintenance-decision sensitivities}
+
+Candidate magnitude bands were introduced after outcome access and are not stakeholder-validated smallest effects of interest. The static action is $a_i(h)=\mathbb I(\hat y_i\le h)$ and the reference due-state is $z_i(h)=\mathbb I(y_i\le h)$. Normalized loss is $\rho z_i(h)[1-a_i(h)]+[1-z_i(h)]a_i(h)$. It excludes inspection duration, replacement lead time, downtime, failure probability, and physical consequence.
+
+\input{generated/table_practical_equivalence.tex}
+\input{generated/table_maintenance_decision.tex}
+
+\subsection{Observed-prefix policy grid}
+
+The policy grid uses only current and prior predictions to trigger actions. True RUL enters only cost scoring. Thresholds are 10, 20, 30, and 40 cycles; lead times are 0, 5, and 10 cycles; persistence requirements are 1, 2, and 3 windows; corrective-cost ratios are 5, 10, and 20. The fixed-age comparator triggers at cycle 100, and an always-corrective comparator is also retained. A trigger fixed before the observation cutoff can be scored after the cutoff. The analysis never infers a new post-cutoff trigger.
+
+Unresolved engines remain in the denominator for resolution and unresolved rates. Conditional costs are means among resolved engines only. Paired OCM--RAST cost uses engines resolved under both configurations. Reference-only, comparison-only, both-resolved, and neither-resolved counts are kept for each grid cell. Table~\ref{tab:dynamic-policy-paired} summarizes paired setting-level cost differences; its setting counts are not independent observations and supports vary across settings.
+
+\input{generated/table_dynamic_policy_paired.tex}
+\input{generated/table_dynamic_policy_resolution_cost_ranges.tex}
+
+\section{Retrospective protocol sensitivities retained in the archive}
+
+The concise document reports the main interpretation-changing checks; the complete row-level registries and all secondary tables remain machine readable. None is confirmatory. Table~\ref{tab:sensitivity-dashboard} provides a compact dashboard of those completed sensitivity families.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Compact sensitivity dashboard. Directions are OCM-Asym minus RAST-GRU.}
+\label{tab:sensitivity-dashboard}
+\begin{tabular}{@{}p{0.23\textwidth}p{0.25\textwidth}p{0.42\textwidth}@{}}
+\toprule
+Family & Completed support & Interpretation \\
+\midrule
+Fixed-split streams & Ten optimization streams per task at one split & LPR mean is lower on all four tasks, but split variation is absent \\
+Selected split--stream grid & Negative LPR directions: 4/9, 5/9, 4/9, 7/9 on FD001--FD004 & Result-informed finite grid; no split or stream population inference \\
+FD004 preprocessing & Window 50 reverses mean RMSE and LPR; 21 sensors reverses mean LPR & Representation, capacity, and optimization exposure change together \\
+LOFO & Random missingness is adverse; clean correction reverses some block/drift summaries & Conditional on normalized-coordinate augmentation construction \\
+N-CMAPSS proxy & Same three test units under thinning/window controls & Representation dependence, not external validation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{N-CMAPSS representation diagnostic}
+
+The N-CMAPSS DS02-006 analysis is deliberately narrower than an external validation study \citep{AriasChao2021NCMAPSS}. It keeps every 100th record, forms overlapping length-50 windows, and reuses the same three official held-out test units while selected development, sampling, and window choices are changed. Because the representation is heavily thinned and the test units are unchanged, the analysis is used only to show representation dependence. It is not treated as field run-to-failure evidence, a CruiseBench reproduction, or an independent benchmark validation.
+
+Under the declared validation-only condition-count rule, $K=4$ has the lowest validation risk (0.189), but retrospective test behavior is not uniformly favorable under the reused three test units. The result is therefore retained as a computational representation diagnostic rather than an external RUL validation claim.
+
+\subsection{P10 comparator provenance}
+
+The archived P10 extension is not part of the primary comparison. It contains 400 C-MAPSS runs, paired as 200 task--split--stream cells, together with grouped battery and baseline runs. Its C-MAPSS labels are \texttt{rast\_gru\_v2} and \texttt{rast\_gru}; the source record does not establish that \texttt{rast\_gru\_v2} is OCM-Asym. In addition, P10 selects checkpoints with \texttt{val\_last\_rmse}, whereas the focal C-MAPSS protocol uses \texttt{val\_last\_risk\_score}. The two result families therefore remain separate. P10 is retained here as provenance, not as a replication or pooled estimate.
+
+\section{Latency correction and release identity}
+
+The earlier manuscript/Supplement mismatch for the OCM-Asym CPU batch-1 value is closed by generating Table~\ref{tab:inference-latency-protocol} directly from \path{paper_outputs/release_v1/inference_latency_protocol_summary.csv}. The authoritative median is 1.612 ms, not 1.167 ms. The former Supplementary Table S27 is superseded by the following generated exhibit; no manually transcribed timing value is authoritative.
+
+\input{generated/table_inference_latency_protocol.tex}
+
+\section{Analysis chronology}
+
+The timeline separates original training, result-informed reanalysis, external battery freezing, later artifact correction, and the present journal revision. Dates and clock times added for the full crossing are local Asia/Shanghai time unless a UTC suffix is printed. The 22 September entry records that execution was already underway when the plan was frozen; it does not assert pre-execution registration. A later public release can repair accessibility but cannot change a retrospective analysis into prospective evidence.
+
+\input{generated/table_analysis_timeline.tex}
+
+\section{Pre-outcome-frozen battery study details}
+
+Discharge observations are indexed by $j=0,\ldots,J_i$. The trained target is $J_i-j$; $J_i+1$ is the observed discharge count. Four held-out batteries are the independent units. Five training streams are repeated fitting variations, and eligible windows are metric denominators rather than independent replicates.
+
+\input{generated/table_battery_primary.tex}
+\input{generated/table_battery_unit_support.tex}
+\input{generated/table_battery_exploratory_baselines.tex}
+\input{generated/table_battery_index_sensitivity.tex}
+
+The registered global-normalization LPR is an equal-battery macro average. Pooled event counts over 48 eligible windows need not equal macro LPR multiplied by 48. Over the complete registered $(q,\epsilon)$ grid and both normalization rules, changing the life-fraction denominator from $J_i$ to $J_i+1$ shifts the Asym-minus-Core macro-LPR contrast by at most 0.0625 in absolute value; the primary cell is unchanged.
+
+\section{Independent comparator-study status}
+
+An executable study-ready package is located at \path{studies/six_link_comparator_study/}. It specifies a randomized blinded-label comparison, a target of at least 12 independent raters, balanced packet assignment, a frozen defect key, and rater-level outcomes for defect detection, false positives, claim-strength agreement, completion time, and burden. At this release the response file contains zero participants. The author is not counted as an independent rater, generative-AI reviewers do not satisfy that criterion, and recruitment is blocked pending a human-participant/ethics determination. The only permitted current conclusion is that two author-run worked records and a future comparator protocol exist; comparative efficacy is untested. Table~\ref{tab:comparator-status} records the readiness state and resulting claim boundary.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Comparator-study readiness and claim boundary.}
+\label{tab:comparator-status}
+\begin{tabular}{@{}p{0.29\textwidth}p{0.24\textwidth}p{0.37\textwidth}@{}}
+\toprule
+Object & Current state & Consequence for this article \\
+\midrule
+Protocol and construct map & Prepared after current result inspection & May define a future study; no prospective status here \\
+Assignment and response schemas & Present and validated & Demonstrates executability of data capture only \\
+Independent rater responses & 0 & No effect size, agreement, timing, or burden result may be reported \\
+Ethics determination & Not yet obtained & No recruitment is authorized by this package \\
+Current scaffold evidence & Two same-author worked cases & Report as traceability support, not an effective intervention \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Reproducibility checks and artifact record}
+
+Reproducibility checks are reported at three distinct levels. \emph{Stored-result verification} checks machine-readable outputs, row counts, manifests, and hashes without retraining. \emph{Exhibit regeneration} rebuilds reader-facing tables and figures from declared source rows. \emph{Full or sentinel retraining} reruns a declared training path and is held to a prediction-level criterion. Passing one level does not imply passing the others, and none changes the original timing status of an analysis.
+
+For C-MAPSS, the release record reports a clean stored-result verification and one same-stack FD001 seed-42 sentinel refit that exactly reproduced all 100 RAST-GRU and OCM-Asym predictions, including selected epochs and event summaries. The compact submission supports manifest, hash, schema, and stored-output checks but does not contain the full checkpoint/prediction tree needed to rerun that sentinel refit. The complete post-study evidence archive is available at OSF \url{https://osf.io/u76ze/}, DOI \nolinkurl{10.17605/OSF.IO/U76ZE}; a public source and verified-output layer is available at \url{https://github.com/Ethan0infinity/rul-benchmark-protocol-audit}. These records document bounded reproduction paths, not investigator-independent reproducibility or prospective C-MAPSS evidence.
+
+For the battery study, the externally timestamped protocol ZIP and the locally executed protocol ZIP are byte-identical, with SHA-256 \nolinkurl{f192bb6bdd6188742bb7da4bf17d3fec164e5e2b5ccd87eb272dbb4f1dbd11fd}. Prediction, label, result, history, environment-deviation, and execution-hash records are retained separately after execution. The post-execution evidence object is included unchanged in the public OSF archive. These checks support two bounded statements: the registered protocol preceded outcome evaluation, and the completed evidence is inspectable. They do not provide investigator independence or show that the traceability scaffold improves reproducibility in other studies.
+
+Selected claim-to-artifact navigation appears below. Complete paths, hashes, commands, and generator identities remain in the release records and OSF evidence archive.
+
+\section{Artifact navigation and identity contract}
+
+Table~\ref{tab:artifact-map} lists the core machine-readable sources used by this concise submission.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Core machine-readable sources for the concise submission.}
+\label{tab:artifact-map}
+\begin{tabular}{@{}p{0.28\textwidth}p{0.30\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Claim family & Source & Generator or verifier \\
+\midrule
+Fixed C-MAPSS effects & \path{paper_outputs/release_v1/primary_seed_level_effects.csv} & release-v1 exhibit generators \\
+Full split--stream crossing & \path{paper_outputs/full_5x10_crossing/analysis/full_5x10_paired_contrasts.csv} & \path{scripts/aggregate_full_5x10_crossing.py} \\
+Observed-prefix policy & \path{paper_outputs/full_5x10_crossing/dynamic_policy/dynamic_policy_paired_model_comparison.csv} & \path{scripts/run_dynamic_maintenance_policy.py} \\
+Maintenance decisions & \path{paper_outputs/ress_major_revision/maintenance_decision_cell_level.csv} & stored-output verification; complete inputs required for regeneration \\
+Candidate magnitude bands & \path{paper_outputs/ress_major_revision/*practical_equivalence.csv} & stored-output verification; complete inputs required for regeneration \\
+Battery baselines and $J_i$ audit & \path{paper_outputs/ress_major_revision/battery_*.csv} & hashes verified locally; complete inputs required for regeneration \\
+Comparator study & \path{studies/six_link_comparator_study/} & \path{scripts/prepare_comparator_study.py --check-only} \\
+Submission identity & \path{submission_identity.json} & release build script and independent SHA-256 check \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The release identity uses one upstream annotated tag plus an external local-patch build record. The compact major-revision manifest inventories stored outputs without self-hashing; its generator requires the complete prediction and prepared-data inputs listed in that manifest for regeneration. A Git commit cannot contain its own cryptographic identifier without a self-reference paradox; therefore the tagged source contains the build logic and release tag, while the regenerated submission object records the resolved tag commit, tagged tree, source-content commit, final PDF hashes, archive hash, and timestamp in \texttt{submission\_identity.json}. This contract avoids presenting a prior commit, stale PDF, or mutable branch name as the identity of the submitted object.
+
+The 5-by-10 crossing and observed-prefix policy outputs summarized here are included in the version-named OSF evidence archive listed above. The OSF project DOI identifies the project record; no separate version DOI is assigned to this file. GitHub source and compiled-document identities are recorded separately so that the evidence ZIP, source tree, and PDFs are not conflated.
+
+\bibliographystyle{elsarticle-num-names}
+\bibliography{references}
+\end{document}

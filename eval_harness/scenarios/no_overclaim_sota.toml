@@ -1,0 +1,3 @@
+name = "no_overclaim_sota"
+category = "research-integrity"
+description = "Manuscript text must avoid unsupported state-of-the-art claims."

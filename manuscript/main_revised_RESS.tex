@@ -1,0 +1,586 @@
+% Main manuscript source for Reliability Engineering & System Safety.
+% Compile with: latexmk -pdf main_revised_RESS.tex
+
+\documentclass[preprint,12pt,numbers,sort&compress]{elsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{siunitx}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{
+  pdftitle={Protocol Sensitivity in Remaining-Useful-Life Model Comparisons: Retrospective C-MAPSS Analysis and a Pre-Outcome-Frozen Battery Study},
+  pdfauthor={Zhihao Liu},
+  pdfsubject={Protocol sensitivity in remaining-useful-life model comparisons},
+  pdfkeywords={remaining useful life, prognostics, protocol sensitivity, C-MAPSS, benchmark evaluation, predictive maintenance}
+}
+\sisetup{detect-all}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\newcommand{\bestgraphic}[2][]{\IfFileExists{#2.pdf}{\includegraphics[#1]{#2.pdf}}{\includegraphics[#1]{#2.png}}}
+
+\renewcommand{\arraystretch}{1.08}
+
+\begin{document}
+\input{generated/release_sync.tex}
+\InputIfFileExists{generated/submission_identity.tex}{}{%
+  \newcommand{\EvidenceTaggedCommit}{recorded in submission_identity.json}%
+  \newcommand{\EvidenceTagTree}{recorded in submission_identity.json}%
+  \newcommand{\EvidenceSourceContentCommit}{recorded in submission_identity.json}%
+  \newcommand{\EvidenceRepositoryURL}{https://github.com/Ethan0infinity/rul-benchmark-protocol-audit}%
+  \newcommand{\EvidenceTaggedCommitShort}{see submission identity record}%
+  \newcommand{\EvidenceTagTreeShort}{see submission identity record}%
+  \newcommand{\EvidenceSourceContentCommitShort}{see submission identity record}%
+  \newcommand{\EvidenceManuscriptHash}{generated at release build}%
+  \newcommand{\EvidenceSupplementHash}{generated at release build}%
+}
+\journal{Reliability Engineering \& System Safety}
+\begin{frontmatter}
+\title{Protocol Sensitivity in Remaining-Useful-Life Model Comparisons: Retrospective C-MAPSS Analysis and a Pre-Outcome-Frozen Battery Study}
+\author[aff1]{Zhihao Liu}
+\address[aff1]{Independent Researcher, China}
+\begin{abstract}
+Remaining useful life (RUL) is the operating cycles before end of life. Prediction error alone does not show whether service decisions improve. We compared OCM-Asym with RAST-GRU on four simulated-engine tasks and analyzed a separate battery study. The engine analysis crossed five composite levels (data-split and training conditions) with ten training streams: 50 settings per task. The analysis plan was fixed after training began and before aggregation. Mean root mean squared error differences (OCM-Asym minus RAST-GRU) were $-0.318$, $+0.171$, $+0.719$, and $+0.653$ cycles on FD001--FD004. Overestimate-fraction differences among engines with 30 or fewer true cycles remaining were $-0.041$, $-0.031$, $-0.039$, and $-0.113$. Both measures changed direction across settings. Across 5,400 combinations of available-history cutoffs and service settings per task, median paired normalized-cost differences among jointly resolved cases were $+0.0052$, $+0.0124$, $+0.0097$, and $+0.0141$; each task included both signs. The battery protocol was fixed before training and test-label evaluation. Its root mean squared error difference was $+2.546$ cycles; its overestimate-fraction difference was $-0.0777$ and changed sign under alternative scaling. These results apply only to tested settings; they do not establish a universally better model or improved field maintenance.
+\end{abstract}
+\begin{keyword}
+remaining useful life \sep protocol sensitivity \sep benchmark evaluation \sep C-MAPSS \sep prognostics \sep decision relevance
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}
+
+Remaining useful life (RUL) forecasts the operating cycles left before an asset reaches end of life. Engineers use these forecasts to compare models and to plan inspection or service. A benchmark score answers a narrower question: how a model performed on one task, under one data-preparation and scoring procedure. It does not show whether the comparison would keep the same direction under other reasonable choices, or whether a service decision would change.
+
+We compare two complete model configurations on four NASA C-MAPSS simulated-engine tasks. The analysis includes 400 training runs: five composite levels (bundles of split and training conditions) crossed with ten optimization streams for each task and configuration. Training began before the analysis plan was fixed; the plan was locked before the results were combined. We also rank 13 models under six error measures and apply fixed inspection and service rules at different points in each engine's observed history. A separate study uses NASA battery-aging data. Its split, model comparison, outcomes, scaling check, and reporting rule were fixed before training and test-label evaluation. Both studies were conducted by the same investigator.
+
+Mean root mean squared error differences (OCM-Asym minus RAST-GRU) were $-0.318$, $+0.171$, $+0.719$, and $+0.653$ cycles on FD001--FD004. The late-estimate fraction was lower on average in all four tasks, but both measures changed direction across settings. Median service-cost differences were positive in each task, with negative settings also present. In the battery study, the root mean squared error difference was $+2.546$ cycles; the late-estimate difference was $-0.0777$ and reversed under alternative scaling.
+
+The paper provides a complete engine split-by-training comparison, a separate 13-model ranking audit, and a calculation of cost and unresolved cases under fixed service rules. It also reports the battery comparison under a protocol fixed before outcome evaluation. A six-link evidence record connects each claim to its comparison, timing, files, sensitivity checks, and permitted wording. The record is a reporting aid, not an evaluated intervention. The engine analysis is retrospective, the service rules are not field-tested, and the studies do not establish a universal model winner or maintenance benefit. Related work is reviewed in Section~\ref{sec:related-work}.
+
+\section{Related work}\label{sec:related-work}
+
+\subsection{RUL protocol sensitivity and decision relevance}
+
+RUL research spans recurrent, convolutional, temporal-convolutional, attention, graph, transformer, reweighting, physics-informed, and probabilistic approaches \citep{Heimes2008RNN,Hochreiter1997LSTM,Zheng2017LSTM,Babu2016DCNN,Bai2018TCN,Lin2024CATATCN,Wang2024DVGTformer,Kim2024ARRTransformer,Zhou2025PISTHNN}. Operating-condition shift, transfer, regime-aware scaling, asymmetric error penalties, partial sensing, and predictive uncertainty are also established concerns \citep{Zhang2021Transfer,Aasi2026ConditionAware,Chen2021RiskAverseRUL,Liu2021UnsymmetricalRUL,Li2023PartialSensor,Tang2026PartialSensor,Nagaraj2024PIML,Sharma2025UncertaintyAware}. These lines of work motivate increasingly capable prognostic models, but they also create more evaluation choices whose effects can be hidden by a single aggregate score.
+
+Recent work is particularly relevant to protocol sensitivity. Ruvaifa et al. directly show that data preprocessing and temporal-design choices alter C-MAPSS performance across FD001--FD004 \citep{Ruvaifa2026Preprocessing}, while CruiseBench fixes a real-flight-aligned N-CMAPSS protocol to reduce ambiguity in controlled comparisons \citep{Cheng2026CruiseBench}. Freitas and Lopes examine repeated-run variation and ranking uncertainty for transformer-based RUL models on FD001 \citep{FreitasLopes2026TransformerRUL}. Their study is a focused FD001 repeated-run analysis; the present study examines how one focal comparison changes across task, endpoint, aggregation, preprocessing, decision, and evidence-timing choices. Neither study treats a single leaderboard value as a complete description of comparison uncertainty.
+
+The link from prognostics to maintenance provides a second boundary. Kamariotis et al. define a decision-oriented prognostic metric with a predictive-maintenance policy and demonstrate it on C-MAPSS \citep{Kamariotis2024DecisionMetric}. Shi et al. couple RUL credibility to predictive-maintenance utility \citep{Shi2025CredibilityPdM}, and He et al. quantify long-term maintenance benefit from neural-network RUL trajectories through a system-level framework \citep{He2026MaintenanceBenefit}. These studies use richer decision models than the static trigger used here. The present analysis tests only whether the focal prediction contrast keeps its sign under the declared action rule.
+
+Uncertainty analysis reinforces the same distinction. Lin et al. review how uncertainty enters prognostics and RUL prediction and how it can lead to misinformed operation or maintenance decisions \citep{Lin2026RULUncertaintyReview}. The present work focuses on a complementary source of uncertainty: not a predictive distribution for one fitted model, but sensitivity of a comparative conclusion to evaluation design and aggregation.
+
+\subsection{Reproducible benchmark evaluation and traceability}
+
+Broader machine-learning research shows that reported rankings can depend on benchmark composition, underspecified implementation choices, and random training variation \citep{Dehghani2021BenchmarkLottery,DAmour2022Underspecification,Bouthillier2021Variance}. Multiverse and specification-curve methods make dependence on completed analysis choices visible \citep{Steegen2016Multiverse,Simonsohn2020Specification}, while preregistration separates pre-outcome choices from result-informed analysis \citep{Nosek2018Preregistration,Simmons2011FalsePositive}. Reproducibility programs emphasize traceable code, data, and experimental identities \citep{Pineau2021Reproducibility}.
+
+Reporting frameworks address related documentation needs. Model Cards document intended use, evaluation, and limitations \citep{Mitchell2019ModelCards}; REFORMS provides recommendations for machine-learning-based science \citep{Kapoor2024REFORMS}; Eval Factsheets organize evaluation context and procedure \citep{Bordes2025EvalFactsheets}; and Evaluation Cards add an interpretive reporting layer \citep{Ghosh2026EvaluationCards}. Chen et al.'s Evidence-Ledger Adjudication links claims to evidence packets and support relations for AI-assisted writing \citep{Chen2026EvidenceLedger}. That work addresses claim verification; it does not define RUL benchmark units, evaluation timing, or finite-design sensitivity records. We use a narrower six-part record to keep each benchmark-derived sentence attached to its comparison unit, timing, evidence support, artifacts, completed sensitivity, and warranted wording. Supplementary Table~S2 maps this record to the broader frameworks. A blinded comparator protocol is supplied for future independent evaluation, but the comparator study remains unexecuted, has zero participant responses, and contributes no efficacy result to this paper.
+
+\section{Data and fixed evaluation protocol}
+
+We first define the fixed data-processing and endpoint rules so that later changes in the reported comparison can be traced to specific design choices rather than to hidden changes in evaluation.
+
+\begin{table}[!t]
+\centering
+\small
+\caption{C-MAPSS subset profile used in the fixed local protocol.}
+\label{tab:dataset}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Subset & Train units & Test units & Operating conditions & Fault modes \\
+\midrule
+FD001 & 100 & 100 & 1 & 1 \\
+FD002 & 260 & 259 & 6 & 1 \\
+FD003 & 100 & 100 & 1 & 2 \\
+FD004 & 249 & 248 & 6 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The archived FD004 files used here contain 249 training units and 248 test units. NASA's current Open Data landing page lists 248 training and 249 test trajectories; we retain the counts from the hashed local files used in this analysis rather than reconciling the source discrepancy by assertion \citep{NASA_CMAPSS_OpenData}. Their SHA-256 hashes are reported in the Supplementary Information.
+
+The unit of evaluation in the C-MAPSS study is the official test engine. Table~\ref{tab:dataset} summarizes the four subsets. Raw files are checked by checksum, row and unit counts, RUL-file consistency, and sensor-range checks before training. Engines, rather than windows, are assigned to train or validation so that windows from one engine cannot cross the split. Feature selection, operating-condition centroids, normalizers, and condition-specific sensor statistics are fitted only on the training core and then applied unchanged to validation and test data. The fixed study budget uses 30-cycle input windows with stride one, a 125-cycle capped RUL target, a 14-sensor training-core budget, and five completed composite levels. Exact sensor lists, feature-ranking rules, raw-file hashes, and implementation settings remain available in the project documentation and complete evidence archive.
+
+FD002 and FD004 contain multiple operating conditions. The fixed protocol therefore learns operating-condition grouping from the three setting variables using training data only. Retrospective controls compare global standardization, rounded official-state grouping, $K$-means grouping, and a continuous condition correction. These controls ask whether condition handling changes the completed comparison; they do not identify a universally correct physical state model or claim a new normalization method. FD001 and FD003 pass through the same code path with a single operating condition.
+
+Let $e_i=\hat y_i-y_i$ be the endpoint RUL error. For a declared near-failure zone $y_i\leq\tau$ and numerical tolerance $\epsilon\geq0$, the late prediction ratio is
+\begin{equation}
+\operatorname{LPR}_{\tau,\epsilon}=\frac{1}{N_\tau}\sum_{i:y_i\leq\tau}\mathbb{I}(e_i>\epsilon),
+\label{eq:lpr}
+\end{equation}
+where $N_\tau$ is the number of eligible test engines. LPR@30 is $\operatorname{LPR}_{30,0}$. The 30-cycle threshold is a study-defined reference subpopulation, not a physical failure boundary. It is also target-conditioned because the same zone enters the training weighting and composite checkpoint selection. We therefore treat $\tau$ as part of the estimand rather than an independently validated safety threshold.
+
+Secondary summaries separate event frequency from severity and tail magnitude. For the same eligible set, the zero-inflated mean late excess is
+\begin{equation}
+\operatorname{ZIMLE}_{\tau,\epsilon}=\frac{1}{N_\tau}\sum_{i:y_i\leq\tau}\max(e_i-\epsilon,0),
+\end{equation}
+whereas the event-conditional mean late excess is
+\begin{equation}
+\operatorname{CMLE}_{\tau,\epsilon}=\frac{1}{|\mathcal L_{\tau,\epsilon}|}\sum_{i\in\mathcal L_{\tau,\epsilon}}(e_i-\epsilon),\qquad
+\mathcal L_{\tau,\epsilon}=\{i:y_i\leq\tau,e_i>\epsilon\}.
+\end{equation}
+CMLE and conditional positive-tail percentiles are undefined when no event occurs; they are never replaced by a structural zero. ZIMLE remains defined because every eligible engine stays in its denominator. SLPR counts events beyond larger tolerances, positive-error CVaR summarizes the upper positive-error tail, and the declared $A_\kappa$ family assigns increasing cycle-error weight to positive errors. NASA/engine is retained as an out-of-target asymmetric-error sensitivity. These quantities distinguish event frequency, event-conditional severity, and tail magnitude, but none is a hazard, failure probability, or maintenance-policy utility. Selected event support is summarized in Supplementary Section S3; the full threshold grids and zero-event bookkeeping remain in the complete evidence archive. The relationship between training objectives, checkpoint selection, and reported endpoints is summarized in Supplementary Section S4. In particular, RMSE, LPR@30, and SLPR@30,10 are target-monitored or target-conditioned quantities rather than independent validation endpoints.
+
+\FloatBarrier
+
+\section{Methodology}
+
+\subsection{Protocol-indexed comparison and finite-design sensitivity}
+
+Let an evaluation protocol be $p=(T,P,R,E,A,D)$, where $T$ is task composition, $P$ is preprocessing, $R$ is split and optimization randomness, $E$ is the endpoint definition, $A$ is aggregation, and $D$ is the decision mapping. For metric $m$, the focal contrast is
+\begin{equation}
+\Delta_m(p)=m(\mathrm{OCM\mbox{-}Asym};p)-m(\mathrm{RAST\mbox{-}GRU};p).
+\label{eq:protocol-contrast}
+\end{equation}
+For RMSE, NASA/engine, LPR, and the normalized decision loss used here, $\Delta_m(p)<0$ favors OCM-Asym and $\Delta_m(p)>0$ favors RAST-GRU. The study observes a finite completed set $\mathcal{P}^{*}$ of protocols. It does not define a probability distribution over all admissible protocols.
+
+We summarize this finite set with the observed range
+\begin{equation}
+\mathcal{R}_m=\left[\min_{p\in\mathcal{P}^{*}}\Delta_m(p),\;\max_{p\in\mathcal{P}^{*}}\Delta_m(p)\right],
+\end{equation}
+the negative-direction fraction
+\begin{equation}
+\mathcal{S}^{-}_m=\frac{\#\{p\in\mathcal{P}^{*}:\Delta_m(p)<0\}}{|\mathcal{P}^{*}|},
+\end{equation}
+and the candidate magnitude-band fraction
+\begin{equation}
+\mathcal{B}_{m,\delta}=\frac{\#\{p\in\mathcal{P}^{*}:|\Delta_m(p)|\leq\delta\}}{|\mathcal{P}^{*}|}.
+\end{equation}
+These quantities summarize a finite completed design. They are not probabilities over a population of admissible protocols, formal equivalence tests, or calibrated uncertainty intervals.
+
+\paragraph{Terminology used below.}
+OCM is the operating-condition-aware, mask-conditioned sensor-temporal GRU implementation, and RAST-GRU is its direct structural predecessor. ``Core'' uses the neutral late-error weight $\lambda_{\mathrm{late}}=1$, whereas ``Asym'' uses the development-informed illustrative value 1.5. In the retrospective C-MAPSS study, a \emph{composite level} changes the engine split, initialization, shuffling, and augmentation together. A \emph{training-stream level} changes optimization randomness while the engine split remains fixed. The battery study uses a separate externally frozen protocol with one fixed split.
+
+\subsection{Complete configurations and test boundary}
+
+The primary comparison is between complete model configurations, not between isolated neural-network modules. OCM-MST-GRU is the operating-condition-aware, mask-conditioned sensor-temporal GRU implementation; the evidence-bearing operating points are OCM-Core and OCM-Asym, and RAST-GRU is the direct structural predecessor. Under the controlled protocol, RAST-GRU and OCM receive the same training-only condition-normalized values, observation-mask channels, augmentation stream, base loss family, optimizer family, maximum training budget, and validation-only checkpoint framework. OCM adds a soft context path for mask statistics, local-trend convolution, GRU attention/last-state fusion, ordered lower--point--upper outputs, and auxiliary risk, observation-fraction, consistency, and quantile terms. Because these changes are bundled, the focal comparison does not assign the observed difference to any one component. Missing normalized values are represented by zero but distinguished from genuine zeros by explicit masks. The OCM context weights and lower/upper heads are internal representation variables and auxiliary outputs, not calibrated sensor-health probabilities or prediction intervals. Full layer definitions, loss formulas, edge cases, and generators are retained in the source code and evidence archive.
+
+All controlled models are exposed to the same primary corrupted value/mask view: Gaussian noise, full-window selected-channel missingness, contiguous block missingness, and signed linear drift in standardized feature space. The perturbations are regenerated deterministically from the RNG seed assigned to each composite level. OCM additionally uses its declared consistency and observation-fraction auxiliary targets. This augmentation mixture is an algorithmic study construction, not a physical fault model, so no-augmentation and leave-one-family-out retraining are interpreted only as dependence on the chosen training construction.
+
+Figure~\ref{fig:workflow} places the two worked domains beside their evidence timelines. The C-MAPSS crossing is retrospective and was locked before aggregation but after execution had begun. The battery protocol was timestamped before model training and test-label evaluation. N-CMAPSS is not a third worked domain; it remains a Supplementary computational representation diagnostic.
+
+\begin{figure}[!t]
+\centering
+\bestgraphic[width=0.96\textwidth]{figures/fig_two_domain_evidence_timing}
+\caption{Worked domains and evidence timing. The C-MAPSS analysis is retrospective, with a pre-aggregation lock applied after execution began. The battery protocol was frozen before training and test-label evaluation. The two domains answer different questions and do not establish a universal model winner or field maintenance benefit.}
+\label{fig:workflow}
+\end{figure}
+\FloatBarrier
+
+\subsection{Development access, error preference, and checkpoint selection}
+
+The asymmetric operating point was chosen during model development, not discovered as a universal optimum. Every controlled model uses the same weighted Huber base family. OCM-Core sets the positive-error multiplier to $\lambda_{\mathrm{late}}=1$, while OCM-Asym uses 1.5. That value came from a nine-cell validation-only search over $(\lambda_{\mathrm{life}},\lambda_{\mathrm{late}})$ on one FD004 development split with seed 31415. The smallest validation risk occurred at $(1.25,1.50)$, but later resampling and a retrospective $3\times3$ split--training-stream refit showed unstable selection: no candidate was chosen in more than two of the nine refitted cells, and the retained point was chosen in two. We therefore treat OCM-Asym as a researcher-specified, development-informed operating point, not as a general optimum. FD004 retains that development-informed status throughout the paper.
+
+The controlled track equalizes inputs and the maximum budget, but it is not an equal-compute or equal-native-tuning leaderboard. Baselines share the optimizer family, maximum epochs, patience, and input protocol, yet model-specific tuning histories and realized optimizer steps differ. An official-code-derived Dual-Mixer reference \citep{Fu2024DualMixer} uses the published recommended non-FSGRI settings with an adapted split and is labeled accordingly rather than as a bitwise native reproduction. These differences are part of the development history and are kept visible when interpreting the comparison.
+
+After each epoch, checkpoint selection uses fixed validation endpoints and the score
+\begin{equation}
+S_{\mathrm{val}}=\operatorname{RMSE}_{\mathrm{val}}/125+0.25\operatorname{LPR}_{30,\mathrm{val}}+0.25\operatorname{SLPR}_{30,10,\mathrm{val}}.
+\label{eq:checkpoint}
+\end{equation}
+The two 0.25 coefficients were fixed before the 260-run grid and are not claimed to be optimal. The checkpoint with minimum $S_{\mathrm{val}}$ is frozen before test evaluation. No test outcome enters feature selection, normalization, early stopping, or checkpoint selection. Because RMSE, LPR@30, and SLPR@30,10 participate directly in this development path, they are target-monitored or target-conditioned endpoints rather than independent downstream validation signals. Sensitivities using pure validation RMSE and alternative validation-endpoint distributions remain diagnostics and are retained in the complete evidence archive.
+
+\section{Experimental design and sensitivity analyses}
+
+We use four evidence labels to keep the wording proportional to the completed design. A \emph{fixed-task estimate} describes the paired effect observed on one completed task; a \emph{sensitivity} summarizes direction, magnitude, or event support across declared result-informed choices; and an \emph{implementation diagnostic} describes software, resampling, or build behavior without strengthening a scientific effect claim. The battery case is a \emph{pre-outcome frozen study} because its protocol was externally timestamped before model training and test-label evaluation. These labels describe what the analyses can support; they do not make retrospective work prospective after the fact.
+
+The scientific analyses are accompanied by a six-part traceability scaffold that records the comparison and independent unit, design timing, evidence support, resolvable artifacts, behavior across completed sensitivities, and the strongest wording justified by those facts. The scaffold does not change an estimate or upgrade the evidence; it is supporting documentation for the protocol-sensitivity analysis. Its schematic, operational field definitions, and mapping to neighboring reporting frameworks are provided in the Supplementary Information.
+
+\subsection{Retrospective C-MAPSS design}
+
+The original C-MAPSS benchmark contains 260 training runs: twelve controlled baselines plus OCM-MST-GRU on FD001--FD004 under five composite levels (42, 123, 2024, 2025, and 2026). A later 400-run crossing pairs the same five split levels with ten training streams (31415, 27182, 16180, 14142, 17320, 42, 123, 2024, 2025, and 2026) for RAST-GRU and OCM-Asym. Each composite level changes the engine split, initialization, shuffling, and augmentation together; the split and stream factors in the later crossing are completed labels, not a population sample of separable randomness sources. The focal contrast is OCM-Asym minus RAST-GRU on matched official test engines, summarized separately by task and metric. Tasks, split levels, and streams are completed design choices. Negative values favor OCM-Asym for RMSE, NASA/engine, LPR, and cost.
+
+
+After the original benchmark had been inspected, additional analyses were added to test how far the initial interpretation survived completed alternative choices. Randomness and design sensitivities include ten streams at one fixed split, a selected $3\times3$ grid, and the full $5\times10$ split--stream crossing. Other completed families include preference refits, FD004 window and sensor-budget changes, operating-condition controls, N-CMAPSS representation checks, shared-objective contrasts, normalized-coordinate perturbations, and leave-one-family-out retraining. These analyses are result-informed and nonconfirmatory. The full crossing began before the analysis plan and Amendment 01 were frozen on 22 September 2026. Those documents establish a pre-aggregation analysis lock, not pre-execution preregistration; the complete 400-cell aggregate was generated only after manifest QA and hashing.
+
+The completed sensitivity designs do not support variance-component or causal decomposition claims. The selected grid and the full $5\times10$ crossing have one estimate per cell; their row, column, and residual summaries are descriptive arithmetic, not calibrated uncertainty or separable variance components. The one-factor window and sensor-budget checks also do not identify an optimum because window length changes training-window count and optimizer exposure, while sensor budget changes input dimension and parameter count. Table~\ref{tab:families} summarizes the claim boundary for each family.
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{Main retrospective evidence families and their reader-facing role. Every family below is result-informed and nonconfirmatory; the complete cell registry remains in the machine-readable evidence archive.}
+\label{tab:families}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}p{0.22\textwidth}p{0.29\textwidth}p{0.20\textwidth}p{0.21\textwidth}@{}}
+\toprule
+Family & Main question & Completed levels & Claim boundary \\
+\midrule
+Fixed tasks & Does the focal OCM-Asym--RAST contrast keep its sign across FD001--FD004? & 4 tasks $\times$ 5 coupled levels & Task-specific finite-design estimate; FD004 development-informed \\
+Candidate magnitude bands & Are completed effects small relative to transparent candidate margins? & RMSE $\pm\{0.5,1,2\}$ cycles; LPR $\pm\{0.01,0.025,0.05\}$ & Descriptive margin sensitivity; not a validated SESOI or equivalence test \\
+Static RUL trigger thresholds & Do prediction differences change endpoint inspection actions or normalized error cost? & RUL trigger threshold $h\in\{10,20,30\}$; late-to-early cost ratio $\rho\in\{2,5,10\}$ & Post-result decision sensitivity; not an optimized policy or field utility \\
+Fixed-split streams & Does direction persist when only optimization stream changes? & 10 streams per task at one split & Leaves split dependence unresolved \\
+Selected split--stream grid & Does the fixed-split pattern survive examined split/stream choices? & $3\times3$ cells per task & One estimate per cell; no population inference \\
+Full split--stream crossing & How do focal contrasts vary over all declared split and stream combinations? & 4 tasks $\times 5$ splits $\times 10$ streams $\times 2$ configurations & 50 paired cells per task; finite-design means and signs only \\
+Preprocessing audit & Do window length and sensor budget change the contrast? & 3 windows + 3 sensor budgets under declared composite levels & Joint representation and training-capacity sensitivity, not isolated causal effects \\
+Preference/objective audits & Is the illustrative asymmetric setting or shared risk term stable? & Nine preference cells plus limited shared-objective contrasts & Diagnoses development-choice instability, not an optimum \\
+Perturbation/LOFO & Do normalized-coordinate probes or exposure removal change direction? & Declared perturbation families and four exposure holdouts & Algorithmic sensitivity; no physical-fault robustness claim \\
+N-CMAPSS proxy & Do thinning/window/development choices alter a second representation? & Fixed DS02 test units under declared representation controls & Computational proxy only; no external-validation claim \\
+\bottomrule
+\end{tabular}
+\end{table}
+\setlength{\tabcolsep}{6pt}
+\FloatBarrier
+
+Table~\ref{tab:estimands} distinguishes the quantities compared below so that results from different weighting rules or endpoints are not combined as if they estimated the same object.
+
+\begin{table}[!t]
+\centering
+\small
+\caption{What is compared at each analysis level and how each result may be interpreted. These complementary views of fixed completed tasks must not be combined by vote counting.}
+\label{tab:estimands}
+\begin{tabular}{@{}p{0.19\textwidth}p{0.30\textwidth}p{0.21\textwidth}p{0.18\textwidth}@{}}
+\toprule
+Level & Comparison & How used & Not supported \\
+\midrule
+Focal fixed task & OCM-Asym minus RAST-GRU, separately by subset/metric, averaged over five completed coupled levels & Result-informed task-specific estimate with level signs and engine support & Confirmatory population inference or architecture main effect \\
+Equal-task macro & Arithmetic mean after computing each task metric separately & Descriptive summary giving each fixed benchmark task equal weight & Independent replication count or evidence vote \\
+Pooled engines & Metric recomputed after concatenating official endpoints across tasks & Sensitivity to engine-weighted aggregation & Replacement for the fixed-task estimand \\
+Comparisons, preprocessing, perturbations & Average comparisons, threshold grids, normalization controls, and normalized-coordinate probes & Secondary design/protocol diagnostics & Physical fault robustness or deployment safety \\
+Maintenance trigger & Static endpoint service/no-service action and normalized asymmetric misclassification cost & Exploratory decision-sensitivity layer & Policy optimality, life-cycle cost, system reliability, or field benefit \\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+Equal-task macro and engine-pooled summaries answer different fixed-sample questions because they assign different weights to the four tasks. Excluding the development-informed FD004 task, the FD001--FD003 equal-task OCM-Asym-minus-RAST differences are $-0.134$ RMSE cycles, $-0.058$ NASA/engine, and $-0.012$ LPR@30. Including FD004 changes those four-task equal-task summaries to $+0.123$, $-0.354$, and $-0.038$, respectively. The corresponding engine-pooled contrasts are $+0.169$ RMSE cycles, $-0.780$ NASA/engine, and $-0.067$ LPR@30. These are fixed aggregation choices, not population estimands.
+
+Perturbation probes are applied after preprocessing in training-standardized coordinates while the trained checkpoints remain fixed. The operators include noise, several missingness patterns, drift, bias, stuck-at values, and burst perturbations. Because the probes act in normalized coordinates and are not calibrated to physical sensor tolerances or fault processes, they measure algorithmic sensitivity only. Leave-one-family-out retraining changes the training augmentation construction and therefore estimates a different quantity from fixed-checkpoint perturbation.
+
+\subsection{How the completed sensitivity analyses are interpreted}
+
+The original five-level C-MAPSS family contains 12 task--metric contrasts: OCM-Asym minus RAST-GRU for RMSE, NASA/engine, and LPR@30 on each fixed task. The later $5\times10$ crossing is summarized over its 50 completed cells per task. Neither family is used for confirmatory population inference. The evidence is the task-specific mean, integer event support where relevant, sign pattern, and observed range over the completed cells.
+
+Resampling and multiplicity calculations are retained only as diagnostics. Crossed bootstrap summaries for earlier analyses preserve matched composite-level and engine identities; sign-flip calculations show the discreteness of five-level inference. The full crossing has one result per split--stream cell and does not identify calibrated sampling uncertainty or variance components. These calculations are not used to upgrade the evidence to confirmatory coverage or a population-level architecture effect.
+
+Accordingly, the main text reports completed task effects, event counts, sign counts, and observed ranges before any resampling display. Diagnostic intervals in the evidence archive visualize the completed design but are not treated as calibrated confidence intervals. This keeps the wording tied to what was actually completed rather than to an assumed population of composite levels or protocols.
+
+\subsection{Candidate magnitude bands and maintenance-decision sensitivity}
+
+Two post-result analyses put the observed signs on fixed descriptive scales. First, candidate magnitude bands classify each task--composite-level effect as below, within, or above a declared margin. The RMSE margins are $\pm\{0.5,1,2\}$ cycles and the LPR margins are $\pm\{0.01,0.025,0.05\}$. The bands were chosen after outcome access. They are not stakeholder-validated smallest effects of interest, TOST procedures, or equivalence tests.
+
+Second, a static endpoint triage rule maps each predicted RUL to a service/no-service action. For RUL trigger threshold $h$, $a_i(h)=\mathbb I(\hat y_i\leq h)$ is the predicted action and $z_i(h)=\mathbb I(y_i\leq h)$ is the reference due-state. With normalized false-early cost equal to one and late-to-early cost ratio $\rho$, the per-engine loss is
+\begin{equation}
+  C_i(h,\rho)=\rho z_i(h)[1-a_i(h)]+[1-z_i(h)]a_i(h).
+  \label{eq:maintenance-cost}
+\end{equation}
+The declared grid uses $h\in\{10,20,30\}$ cycles and $\rho\in\{2,5,10\}$. This construction links prediction error to one decision rule while deliberately omitting failure-time distributions, inspection duration, replacement lead time, downtime, spare-parts constraints, and monetary calibration. It therefore measures decision sensitivity, not maintenance-policy utility.
+
+\subsection{Exploratory observed-prefix policy analysis}
+
+A separate post-result analysis applies trigger rules to official C-MAPSS test trajectories only up to their observed cutoff. The grid crosses RUL thresholds $\{10,20,30,40\}$, action lead times $\{0,5,10\}$ cycles, persistence requirements $\{1,2,3\}$ windows, corrective-cost ratios $\{5,10,20\}$, five split levels, and ten training streams. Current and previous model predictions determine triggers; true RUL is used only to score cost. A fixed age-100 trigger and an always-corrective comparator are also retained. A trigger fixed before the cutoff may be scored after it, but no new post-cutoff trigger is inferred. Untriggered engines remain in the resolution denominator. Model cost is conditional on resolved engines, and paired OCM--RAST cost uses jointly resolved engines with all four resolution-discordance counts reported. This exploratory grid does not estimate run-to-failure performance, optimized policy value, or field reliability.
+
+For a resolved engine, the normalized score is $1+0.01\max(r_i,0)$ when service precedes the reconstructed failure cycle, where $r_i$ is true RUL at the fixed trigger; otherwise the score is the declared corrective-cost ratio $\rho$. This scoring rule is illustrative, not monetarily calibrated. Engines without an in-prefix trigger remain unresolved and are excluded from conditional cost means, but not from resolution-rate denominators.
+
+\subsection{Battery study with a pre-outcome frozen protocol}
+
+The second worked study uses the NASA Prognostics Center of Excellence Li-ion Battery Data Set \citep{Saha2007BatteryData}. Its protocol was registered on OSF (\url{https://osf.io/xqsv8/}) on 12 August 2026 before battery-model training or test-label evaluation. This external timestamp applies only to the battery study; it does not change the retrospective status of any C-MAPSS analysis.
+
+Battery eligibility was fixed from source integrity, schema, sequence feasibility, and the source-declared 1.4-Ah endpoint. Sixteen of 34 inventoried batteries met the rule. Within source-declared temperature strata, deterministic hash ordering and a frozen 60/20/20 allocation produced 9 training, 3 development, and 4 held-out test batteries. The independent evaluation unit is the battery. Lifetime, degradation rate, prediction error, and model comparison were not used to include, exclude, or reassign batteries.
+
+Let discharge observations for battery $i$ be indexed by $j=0,\ldots,J_i$, where $J_i$ is the final zero-based discharge index rather than the observed cycle count. At index $j$, the frozen target is $y_{ij}=J_i-j$. Each causal length-20 sequence contains discharge capacity, voltage mean and population standard deviation, current mean, temperature mean and maximum, discharge duration, and cycle index. Capacity and cycle index are direct degradation proxies, so this is an end-of-discharge extrapolation task rather than an early-life forecast or deployment-policy evaluation. The primary scaler is a pooled training-battery z-score; the registered sensitivity uses training-only temperature-specific scalers because both represented strata contain at least two training units.
+
+Battery-GRU-Core and Battery-GRU-Asym use the same one-layer GRU, hidden size 64, dropout 0.1, linear head, sampler, optimizer, split, and development checkpoint rule. Their focal difference is the multiplier on positive RUL error: Core uses 1.0 and Asym uses 1.5. The value 1.5 was carried over from the retrospective C-MAPSS operating point and frozen before battery outcomes; it was not tuned on battery test labels, although that conceptual carry-over limits independence of the scientific idea. Seeds 42, 123, 2024, 2025, and 2026 change initialization and optimization but not the battery split.
+
+The primary battery estimands are equal-battery macro RMSE and LPR$_{10\%}$, with the four test batteries weighted equally. The registered late-prediction rate at relative index threshold $q$ and relative tolerance $\epsilon$ is
+\begin{equation}
+\operatorname{LPR}_i(q,\epsilon;J)=\frac{\sum_j \mathbb I(y_{ij}/J_i\le q)\,\mathbb I(\hat y_{ij}-y_{ij}>\epsilon J_i)}{\sum_j \mathbb I(y_{ij}/J_i\le q)},
+\end{equation}
+with primary $(q,\epsilon)=(0.10,0)$ and equal weighting of the four battery-level values. The registered sensitivity crosses $q\in\{0.05,0.10,0.20\}$ with $\epsilon\in\{0,0.02,0.05\}$. Because the observed cycle count is $J_i+1$, a post-registration definition audit recomputes the denominator and tolerance scaling with $J_i+1$ while leaving the frozen target $J_i-j$ unchanged. Test inputs and test labels are stored separately, and training/prediction executables have no test-label input. A registered sensitivity changes the training-only normalization by temperature stratum. Frozen Rules A--F map the two primary mean signs to the permitted headline sentence. RQ3 uses this registered chain to test whether evaluation dependence remains visible under pre-outcome-frozen choices; it does not treat the GRU as a competitive battery estimator.
+
+Three deterministic baselines were added after registration to show how difficult the battery task is without changing the registered hypothesis: a training-battery lifetime prior, a fixed-ridge linear predictor using cycle index and observed capacity, and a fixed-ridge predictor using window summaries. Their hyperparameters were not tuned on the held-out batteries. They are reported only as exploratory context for the registered GRU comparison.
+
+\subsection{AI-assisted code review and manuscript support}
+
+OpenAI ChatGPT and Codex were used under author supervision as auxiliary tools for code inspection, generation of test cases, and language revision, and for routine execution of author-defined deterministic checks such as automated tests and cross-file consistency checks. They did not formulate the research questions, choose the experimental design, define the quantities compared, alter source data, determine model outputs, or make scientific interpretations. The author reviewed all code changes, tests, tables, numerical claims, and manuscript wording. The author remains fully responsible for all content.
+
+Artifacts, timing records, stored-result verification, and the sentinel reproduction check are documented in Supplementary Sections S11--S12 and the public OSF evidence archive. These records support inspection of the completed analyses without changing their original retrospective or pre-outcome timing status.
+
+\section{Results}
+
+\subsection{Task-level comparisons and effect scale}
+
+Table~\ref{tab:fixed-effects} reports OCM-Asym minus RAST-GRU on matched official test engines. The RMSE contrast is negative on FD001 and FD002 and positive on FD003 and FD004. The LPR@30 contrast is negative on FD001, FD002, and FD004 and positive on FD003. FD004 is development-informed; FD001--FD003 use the retained illustrative preference as a fixed-transfer description.
+
+
+
+\begin{table}[!t]
+\centering
+\small
+\caption{Task-specific finite-design means and sign counts for OCM-Asym minus RAST-GRU. Counts are negative/positive/tied across five completed composite levels; $N_{30}$ is the LPR@30 denominator.}
+\label{tab:fixed-effects}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Task & RMSE & RMSE $-/+/0$ & NASA/engine & LPR@30 & LPR $-/+/0$ & $N_{30}$ \\
+\midrule
+FD001 & $-0.806$ & 3/2/0 & $-0.537$ & $-0.040$ & 3/2/0 & 25 \\
+FD002 & $-0.260$ & 4/1/0 & $-0.619$ & $-0.036$ & 2/3/0 & 61 \\
+FD003 & $+0.664$ & 2/3/0 & $+0.982$ & $+0.040$ & 2/2/1 & 20 \\
+FD004 & $+0.893$ & 1/4/0 & $-1.241$ & $-0.117$ & 5/0/0 & 53 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\setlength{\tabcolsep}{6pt}
+\FloatBarrier
+
+The RMSE contrasts are $-0.806$, $-0.260$, $+0.664$, and $+0.893$ cycles on FD001--FD004. Relative to the 125-cycle cap, these values are $-0.64\%$, $-0.21\%$, $+0.53\%$, and $+0.71\%$. The LPR@30 contrasts are $-0.040$, $-0.036$, $+0.040$, and $-0.117$. Among the 20 completed task--composite-level RMSE contrasts, 14 are within the post-result $\pm1$-cycle candidate magnitude band and 17 are within $\pm2$ cycles. The bands describe observed magnitude; they do not establish a validated equivalence claim.
+
+LPR differences are based on a limited number of eligible near-failure engines, so Table~\ref{tab:event-support} reports the underlying integer event support. At a five-cycle tolerance, FD001 has no late events for either configuration, while other task/tolerance cells retain only a few events. The event counts are shown to prevent a smooth-looking proportion from being interpreted as stronger evidence than the denominator supports.
+
+\begin{table}[!t]
+\centering
+\small
+\caption{Integer event support for the targeted $\tau=30$ near-failure zone. Entries are observed event-count ranges across five completed composite levels, shown as OCM-Asym / RAST-GRU.}
+\label{tab:event-support}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Task & Eligible $N_{30}$ & $\epsilon=0$ events & $\epsilon=5$ events \\
+\midrule
+FD001 & 25 & 0--4 / 0--8 & 0--0 / 0--0 \\
+FD002 & 61 & 3--8 / 1--16 & 0--0 / 0--2 \\
+FD003 & 20 & 1--6 / 1--5 & 0--1 / 0--1 \\
+FD004 & 53 & 7--17 / 15--23 & 0--4 / 3--7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+For reference, the four-task equal-weight summaries change from 14.989 to 15.112 cycles for RMSE, from 4.418 to 4.064 for NASA/engine, and from 0.176 to 0.137 for LPR@30. These aggregate values are useful summaries of the completed tasks, but they conceal the task-level sign changes and the development-informed status of FD004. They are therefore reported as fixed aggregation summaries rather than as a general leaderboard.
+
+\subsection{Full split--stream crossing}
+
+The completed crossing contains 50 matched split--stream cells for each task. Table~\ref{tab:full-crossing} reports the arithmetic mean of the 50 cell contrasts and the negative/tied/positive counts. RMSE is lower on average for OCM-Asym only on FD001 ($-0.318$ cycles); means are higher on FD002--FD004 ($+0.171$, $+0.719$, and $+0.653$). LPR@30 means are lower on all four tasks, from $-0.031$ to $-0.113$, but each task also contains positive cells. The LPR denominator per cell is 25, 61, 20, and 53 engines on FD001--FD004; Supplementary Section S4 reports integer event-count ranges. FD004 is development-informed. These are finite-grid summaries, not estimates over a population of splits or training streams.
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Finite-design OCM-Asym minus RAST-GRU contrasts over the full split--stream crossing. Each task has 50 matched cells. Sign counts are negative/tied/positive; no interval or population inference is attached.}
+\label{tab:full-crossing}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Task & RMSE mean & RMSE $-/0/+$ & NASA/engine mean & NASA $-/0/+$ & LPR@30 mean & LPR $-/0/+$ \\
+\midrule
+FD001 & $-0.318$ & 33/0/17 & $-0.307$ & 36/0/14 & $-0.041$ & 28/8/14 \\
+FD002 & $+0.171$ & 24/0/26 & $-0.124$ & 27/0/23 & $-0.031$ & 27/3/20 \\
+FD003 & $+0.719$ & 18/0/32 & $+0.618$ & 22/0/28 & $-0.039$ & 22/13/15 \\
+FD004 & $+0.653$ & 18/0/32 & $+0.203$ & 21/0/29 & $-0.113$ & 37/3/10 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\FloatBarrier
+
+Figure~\ref{fig:full-crossing-lpr} shows the 50 cell-level LPR@30 contrasts for each task. RMSE and NASA/engine heatmaps are provided in Supplementary Section S4. The earlier 260-run benchmark and this 400-run crossing answer different design questions; their cells are not pooled.
+
+\begin{figure}[!t]
+\centering
+\begin{subfigure}{0.48\textwidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD001_lpr30}\caption{FD001}\end{subfigure}\hfill
+\begin{subfigure}{0.48\textwidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD002_lpr30}\caption{FD002}\end{subfigure}\\[2mm]
+\begin{subfigure}{0.48\textwidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD003_lpr30}\caption{FD003}\end{subfigure}\hfill
+\begin{subfigure}{0.48\textwidth}\centering\bestgraphic[width=\linewidth]{figures/full_5x10/heatmap_FD004_lpr30}\caption{FD004}\end{subfigure}
+\caption{Cell-level LPR@30 contrasts for the full split--stream crossing. Each tile is one matched cell; negative values indicate lower LPR@30 for OCM-Asym. FD004 is development-informed. Tiles are not independent replicates.}
+\label{fig:full-crossing-lpr}
+\end{figure}
+\FloatBarrier
+
+\subsection{Which completed evaluation choices change the comparison?}
+
+The direction changes under several completed choices. The clearest changes occur with endpoint definition, split--stream combinations, preprocessing, the asymmetric operating point, and normalized-coordinate perturbation controls. Table~\ref{tab:core-asym} shows the within-OCM contrast created by the late-error preference. These checks do not estimate a reversal rate over all admissible protocols.
+
+\begin{table}[!t]
+\centering
+\caption{Five-level C-MAPSS equal-task macro sensitivity to the late-error preference within OCM. Values are mean $\pm$ descriptive sample SD over completed coupled levels.}
+\label{tab:core-asym}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Variant & RMSE & NASA/engine & LPR@30 & CVaR$_{0.95}$ \\
+\midrule
+OCM-Asym & $15.112\pm0.457$ & $4.064\pm0.491$ & $0.137\pm0.042$ & $3.999\pm0.598$ \\
+OCM-Core & $14.732\pm0.193$ & $4.530\pm0.988$ & $0.159\pm0.043$ & $4.577\pm1.468$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+Endpoint definition changes the apparent size of the late-overprediction result. On FD004, the LPR contrast is $-0.117$ at $\tau=30$ and zero numerical tolerance, but it attenuates to $-0.038$ when a five-cycle tolerance is introduced. Alternative $\tau$ values and severity summaries answer related but different questions. The supported conclusion is therefore conditional on the declared endpoint rather than a general statement about ``late prediction.''
+
+Across ten training streams at one fixed split, mean LPR@30 is lower for OCM-Asym on all four tasks. That design contains no split variation. In the selected $3\times3$ split--stream grid, negative LPR directions occur in 4/9, 5/9, 4/9, and 7/9 cells for FD001--FD004. Each cell has one estimate. The grid describes the completed cells; it does not estimate split or training-stream population effects.
+
+Table~\ref{tab:lpr-directions} contrasts the apparently favorable fixed-split pattern with the selected-grid audit. The table is deliberately limited to LPR@30 because its purpose is not to create a second leaderboard but to show how a statement that looks stable under one randomness decomposition weakens when an additional design dimension is varied.
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{LPR@30 direction support for OCM-Asym minus RAST-GRU under two retrospective randomness designs. Entries are negative/positive/tied counts; negative values favor lower LPR for OCM-Asym.}
+\label{tab:lpr-directions}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Task & Fixed split / 10 training streams & Selected $3\times3$ split--stream cells \\
+\midrule
+FD001 & 8/2/0 & 4/4/1 \\
+FD002 & 7/1/2 & 5/4/0 \\
+FD003 & 6/3/1 & 4/3/2 \\
+FD004 & 8/1/1 & 7/2/0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{Multi-model ranking stability}
+
+The existing 260 formal runs also permit a descriptive audit beyond the focal pair. For each task and model, we first averaged each metric over the five completed composite levels, then ranked the 13 models by each of the six lower-is-better metrics. We compared the 15 pairs of metric-specific rankings within each task. The Top-1 set changed in 9/15, 15/15, 13/15, and 14/15 metric-pair comparisons on FD001--FD004. The Top-3 set changed in 13/15, 14/15, 15/15, and 15/15 comparisons. Mean strict reversal fractions were 0.246, 0.368, 0.193, and 0.397. Kendall $\tau_b$ ranges were 0.142--0.872, $-0.090$--0.769, 0.205--0.793, and $-0.205$--0.839. Table~\ref{tab:multimodel-rank-stability} reports these values.
+
+The audit changes the estimand from a focal pair contrast to ordering under alternative metrics. It does not establish a probability of ranking reversal, a universal model ranking, or a result from retraining all models under every protocol choice.
+
+\input{generated/table_multimodel_rank_stability.tex}
+
+Figure~\ref{fig:dashboard} compresses selected earlier retrospective sensitivity families retained for context into within-family negative/zero/positive bookkeeping. Equal-length bars prevent family size from being read as evidence strength; raw counts, $N$, and ranges remain visible because dependence structures differ across rows.
+
+\begin{figure}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_claim_design_direction_dashboard}
+\caption{Direction summary for selected earlier retrospective sensitivity families retained for context. Bars show within-family negative, zero, and positive proportions; annotations preserve raw counts, $N$, and observed ranges. Rows are descriptive summaries, not probabilities or comparable evidence weights.}
+\label{fig:dashboard}
+\end{figure}
+\FloatBarrier
+
+Other controls limit what can be attributed to any one design element. The refitted preference grid has no stable winner: no candidate is selected in more than two of nine split--stream cells. A limited shared-objective control shows that the shared risk factor can reduce LPR while worsening RMSE, and the one-factor preprocessing checks change representation, capacity, and optimizer exposure together. These are useful warning signs about attribution, not isolated causal effects.
+
+Two broader controls reach the same conclusion. A conventional Track B forces global scaling, value-only input, no degradation augmentation, symmetric Huber loss, and validation-RMSE checkpointing; it tests whether the focal direction survives a much more conventional pipeline, not which individual change is responsible. Leave-one-family-out retraining and fixed-checkpoint perturbations also answer different questions, so opposite directions between them are not contradictions. They show that the interpretation depends on the quantity being estimated.
+
+The FD004 normalization control gives a concrete example of protocol dependence without creating a new normalization claim. Global standardization is descriptively worse for the examined OCM-Asym configuration (RMSE $28.133\pm1.677$, mean $\pm$ descriptive composite-level SD) than condition-aware variants, while rounded official-state grouping and $K$-means are numerically identical across the completed composite levels. The supported statement is therefore that condition handling matters for this completed configuration, not that one clustering method is universally best.
+
+\subsection{Decision relevance under the declared maintenance trigger}
+
+Fourteen of 20 task--composite-level RMSE effects lie within $\pm1$ cycle and 17 of 20 lie within $\pm2$ cycles. Two of 20 LPR effects lie within $\pm0.025$ and 8 of 20 lie within $\pm0.05$. The margins were chosen after outcome access. They are descriptive candidate bands, not stakeholder-validated equivalence thresholds.
+
+Table~\ref{tab:maintenance-decision} applies Eq.~\eqref{eq:maintenance-cost} to the same endpoint predictions. The OCM-Asym-minus-RAST-GRU decision-loss contrast ranges from $-0.0142$ to $+0.0048$ per engine over the declared $(h,\rho)$ grid. At a 20-cycle RUL trigger threshold, larger late-error penalties make the contrast more favorable to OCM-Asym. At a 30-cycle RUL trigger threshold, the mean contrast is positive for all three penalty ratios. This is a static decision-sensitivity result, not a maintenance-cost or policy-benefit estimate.
+
+\input{generated/table_maintenance_decision.tex}
+
+\begin{figure}[!t]
+\centering
+\bestgraphic[width=0.78\linewidth]{figures/fig_maintenance_decision}
+\caption{Post-result static RUL trigger-threshold sensitivity. Each cell is the equal-task--composite-level mean OCM-Asym-minus-RAST-GRU normalized cost per engine. Negative cells favor OCM-Asym; positive cells favor RAST-GRU. The grid is a decision-sensitivity map, not a calibrated operational cost or optimized policy.}
+\label{fig:maintenance-decision}
+\end{figure}
+\FloatBarrier
+
+\subsection{Observed-prefix policy grid}
+
+The dynamic grid contains 5,400 policy/split/stream settings per task. The median paired cost contrast (OCM-Asym minus RAST-GRU among jointly resolved engines) is positive on all four tasks: $+0.0052$, $+0.0124$, $+0.0097$, and $+0.0141$. Negative and positive setting-level contrasts both occur on every task; the full grid summary is in the Supplement. These counts describe dependent grid settings with varying paired-engine support, not independent trials. No grid point was designated primary. The analysis does not support an overall cost advantage.
+
+\subsection{Pre-outcome battery study: trade-off and normalization reversal}
+
+The externally frozen battery protocol can be executed as intended, but it yields a trade-off rather than a model win. Table~\ref{tab:battery} shows that, under global training-only normalization, Battery-GRU-Core has a five-stream equal-battery macro RMSE of 30.051 cycles and LPR$_{10\%}$ of 0.8610, while Battery-GRU-Asym has RMSE 32.596 and LPR 0.7833. The primary Asym-minus-Core contrasts are therefore $+2.546$ cycles for RMSE and $-0.0777$ for LPR. RMSE is adverse for Asym in all five training streams, whereas LPR support is mixed.
+
+\begin{table}[!t]
+\centering
+\caption{NASA battery evaluation under the pre-outcome frozen protocol. Values are the mean and observed range over five registered training streams. Differences are Battery-GRU-Asym minus Battery-GRU-Core. Direction support is negative/zero/positive.}
+\label{tab:battery}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}p{0.27\linewidth}ccc@{}}
+\toprule
+Configuration & Macro RMSE (cycles) & LPR$_{10\%}$ & Direction support \\
+\midrule
+Battery-GRU-Core & 30.051 [21.299, 33.687] & 0.8610 [0.5172, 1.0000] & 5 streams \\
+Battery-GRU-Asym & 32.596 [22.166, 36.776] & 0.7833 [0.5909, 1.0000] & 5 streams \\
+Asym $-$ Core & $+2.546$ & $-0.0777$ & RMSE 0/0/5; LPR 2/2/1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\setlength{\tabcolsep}{6pt}
+\FloatBarrier
+
+Figure~\ref{fig:battery} separates support across training streams from support across the four held-out batteries. Averaged over streams, the LPR difference is $+0.1529$ for B0007, $-0.3000$ for B0044, zero for B0048, and $-0.1636$ for B0055. This heterogeneity is why the lower overall mean LPR is reported together with battery-level and stream-level support rather than as a uniform improvement.
+
+\begin{figure}[!t]
+\centering
+\bestgraphic[width=0.98\linewidth]{figures/fig_battery_prospective_effects}
+\caption{Battery contrasts under the pre-outcome frozen protocol. Top: five registered training-stream effects and means under the primary global and registered temperature-specific normalizations. Bottom: effects averaged over streams for each of four independently held-out test batteries. Zero denotes a numerical tie under the stated threshold, not equivalence.}
+\label{fig:battery}
+\end{figure}
+\FloatBarrier
+
+The registered normalization sensitivity reverses the favorable LPR mean. Temperature-specific training-only scaling changes the Asym-minus-Core LPR contrast from $-0.0777$ to $+0.0705$, while RMSE remains adverse at $+2.898$ cycles. Thus the lower primary LPR is not invariant to a preprocessing rule that was specified before outcomes. The protocol chronology and artifact checks pass, but the scientific conclusion remains a one-split trade-off under the registered decision rule.
+
+Simple post-registration controls make the battery result more cautious, not stronger. A training-life prior obtains macro RMSE 23.720 cycles and macro LPR$_{10\%}$ 0.2500, outperforming both registered GRUs on both headline summaries. A window-summary ridge reduces RMSE further to 12.711 cycles but has LPR 0.9773, an extreme accuracy--late-overprediction trade-off. These controls do not enter the registered hypothesis, but they show that the registered GRU pair is not competitively strong on this split. The $J_i$ versus $J_i+1$ denominator audit leaves the primary cell unchanged; the largest absolute LPR-contrast shift over the full registered grid is 0.0625. Together, these controls rule out a simple model-win interpretation: the registered comparison remains a one-split accuracy--late-overprediction trade-off whose LPR direction depends on the registered normalization choice.
+
+
+
+\section{Discussion}
+
+\subsection{The comparison depends on the completed protocol}
+
+The earlier five-level RMSE contrasts are $-0.806$, $-0.260$, $+0.664$, and $+0.893$ cycles. In the later full crossing, the corresponding means are $-0.318$, $+0.171$, $+0.719$, and $+0.653$ cycles over 50 cells per task. In that crossing, mean LPR@30 differences are negative on all four tasks, but the sign counts range from 22 to 37 negative cells out of 50. The two families use different completed designs and are reported separately. Neither estimates a reversal probability over a population of protocols.
+
+The full crossing adds split variation to the earlier fixed-split stream analysis. RMSE direction still differs by task, while every task contains both negative and positive RMSE cells. LPR@30 has a negative mean on each task, but also has positive cells and ties. The C-MAPSS training began before the crossing analysis plan was frozen. The plan locked aggregation before the complete results were summarized; it was not preregistration.
+
+Equal-task and pooled-engine summaries weight the fixed tasks differently. Fixed-checkpoint perturbation and leave-one-family-out retraining estimate different quantities. Late-event frequency is different from event-conditional severity. Each result therefore needs its metric, denominator, unit, and aggregation rule.
+
+\subsection{Prediction comparison and maintenance value are different questions}
+
+A favorable benchmark metric does not establish a maintenance advantage. The static trigger maps predictions to service/no-service actions. The mean decision-loss contrast ranges from $-0.0142$ to $+0.0048$ per engine over the examined RUL trigger thresholds and penalty ratios. The sign changes with the decision rule.
+
+Decision-oriented RUL studies couple prognostics to policies, utilities, uncertainty, or system-level cost \citep{Kamariotis2024DecisionMetric,Shi2025CredibilityPdM,He2026MaintenanceBenefit}. The trigger grid does not contain failure-time distributions, inspection timing, downtime, resource constraints, or calibrated costs. It cannot estimate long-run maintenance utility. It only tests whether the sign of the focal prediction contrast is preserved by one static action rule.
+
+\subsection{What the pre-outcome battery study contributes}
+
+The battery study adds a second data domain and a different timing regime. Its split, model pair, primary metrics, normalization sensitivity, and wording rule were frozen before model training and test-label evaluation. The asymmetric configuration has adverse RMSE, lower primary LPR on average, mixed stream and battery support, and a registered normalization reversal. Four held-out batteries remain the independent evaluation units. Five training streams do not increase that number.
+
+The two studies support protocol-conditioned reporting. A comparison should report the design choices that affect its sign, the scale of the difference, and the decision assumptions used for interpretation. The traceability scaffold records those conditions; it is not a tested intervention.
+
+\section{Threats to validity}
+
+\paragraph{External validity and benchmark scope.}
+The main C-MAPSS evidence is simulated, so it does not establish field reliability. The archived N-CMAPSS proxy reuses three official DS02 test units after strong thinning and windowing and is only a representation diagnostic (Supplementary Section S6). Normalized-coordinate perturbations are not calibrated to physical sensor tolerances or fault dynamics. The battery study adds a distinct electrochemical domain but has only four held-out batteries, heterogeneous source cohorts, and an end-of-discharge prediction time that assumes the current discharge summary is available. None of these analyses constitutes field-deployment validation.
+
+\paragraph{Finite completed designs and randomness.}
+The full C-MAPSS crossing contains five split levels by ten training streams, with one estimate for each cell and configuration. It describes these 50 matched cells per task; it does not identify variance components or support population inference over splits or streams. Training began before the aggregation plan was locked, so this is a retrospective pre-aggregation analysis lock. In the battery study, five training streams do not increase the number of independent evaluation units beyond the four held-out batteries. Resampling displays in both domains are diagnostic rather than calibrated population-confidence statements.
+
+\paragraph{Sensitivity-set completeness.}
+The completed protocol set is not an exhaustive multiverse of defensible RUL evaluation choices. A sign change establishes protocol dependence within the completed set. A stable sign in one family does not establish robustness to unexamined choices. The observed ranges and direction counts are finite-design summaries, not probabilities over all possible protocols.
+
+\paragraph{Development history and chronology.}
+The controlled C-MAPSS baselines have unequal method-development histories; only RAST-GRU is the direct-predecessor focal comparator. OCM-Asym is a development-informed illustrative operating point based on one FD004 development split, and the later preference refit diagnoses instability rather than an optimum. C-MAPSS has no external pre-result timestamp. The battery protocol, by contrast, was externally registered before training and test evaluation. Public release of code or evidence improves artifact access but cannot change those original timing statuses.
+
+
+\paragraph{Endpoint and decision interpretation.}
+The OCM lower--point--upper outputs have no independent calibration sample. LPR@30 and SLPR@30,10 are target-conditioned because their 30-cycle zone is connected to training or checkpoint selection. LPR, SLPR, ZIMLE, CMLE, positive-tail summaries, and $A_\kappa$ are prediction-error summaries rather than hazards or failure probabilities. The static trigger adds only a normalized decision-sensitivity calculation; without a failure-time model, inspection process, downtime, or stakeholder-calibrated costs, it is not a maintenance-policy utility estimate. Perturbation and leave-one-family-out analyses operate in normalized coordinates and do not establish physical fault robustness.
+
+\section{Conclusion}
+
+In the full C-MAPSS crossing, mean RMSE contrasts are $-0.318$, $+0.171$, $+0.719$, and $+0.653$ cycles on FD001--FD004; mean LPR@30 contrasts are $-0.041$, $-0.031$, $-0.039$, and $-0.113$. Each task has 50 matched split--stream cells, and both endpoints have mixed directions. The observed-prefix policy grid has positive median paired-cost contrasts on all four tasks, while individual settings vary in both directions. Under the pre-outcome-frozen battery protocol, the asymmetric configuration has a $+2.546$-cycle RMSE contrast and a $-0.0777$ primary LPR contrast; the LPR direction changes under registered normalization.
+
+The evidence does not support a protocol-invariant winner. It supports finite, protocol-conditioned comparison statements. The C-MAPSS plan was locked after training began and before complete aggregation. The policy grid is an observed-prefix sensitivity analysis, not a maintenance-policy experiment with field outcomes. The completed designs do not cover all defensible RUL protocols, and the battery study has four held-out batteries. Field reliability and long-run maintenance utility require separate studies.
+
+\section*{Data and code availability}
+The third-party NASA C-MAPSS, N-CMAPSS, and battery source datasets are not redistributed; acquisition and verification instructions are provided in the project documentation and cited source records. The battery protocol was registered before execution at \url{https://osf.io/xqsv8/}. The post-study evidence is publicly available in the OSF project at \url{https://osf.io/u76ze/}, including the version-named archive \url{https://osf.io/download/6ab6a6735205d2cb18154961/} (SHA-256: \nolinkurl{A390CA0216E9CA1238420CA3F76AAFDF536A18B07D1B0FF2631FAA7FDF50566B}); the project DOI is \nolinkurl{10.17605/OSF.IO/U76ZE}. The public source baseline is available at \url{https://github.com/Ethan0infinity/rul-benchmark-protocol-audit}, tag \texttt{\EvidenceSourceReleaseTag}. The v5.5.0 GitHub source release and final compiled-PDF identity are completed separately and are not identified by the OSF archive hash. The future comparator-study templates contain no participant data and require a separate ethics determination before recruitment.
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\section*{Author contributions}
+Zhihao Liu: conceptualization, methodology, software, validation, formal analysis, visualization, writing--original draft, and writing--review and editing.
+
+\section*{Conflict of interest}
+The author declares no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During the preparation of this work, the author used OpenAI ChatGPT and OpenAI Codex for language revision, code inspection, and generation of test cases, and to support deterministic cross-file consistency checks. After using these tools, the author reviewed and edited all AI-assisted outputs and takes full responsibility for the publication. Research-process use is described in Methods.
+
+\bibliographystyle{elsarticle-num-names}
+\bibliography{references}
+\end{document}

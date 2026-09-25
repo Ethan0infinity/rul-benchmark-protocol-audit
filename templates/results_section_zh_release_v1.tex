@@ -1,0 +1,54 @@
+\input{generated/numbers.tex}
+\FloatBarrier
+\section{结果}
+
+\subsection{[正文关注的结果知情固定任务估计] 精度与晚高估估计}
+
+正文关注的比较是在四个固定 C-MAPSS 任务的官方发动机端点上计算 OCM-Asym 减 RAST-GRU。该证据族在早期结果审阅后形成，只承担描述性估计角色。FD004 受开发信息影响；FD001--FD003 是示例偏好下的固定迁移描述。复合种子水平与发动机是交叉因素：每个复合水平同时改变划分、初始化、shuffle 和增强，但预测同一组官方发动机。四个任务不作为任务总体样本。
+
+描述性结果体现精度--晚高估交换。相对 RAST-GRU，OCM-Asym 使等任务宏平均 RMSE 从 14.989 变为 15.112 cycles、NASA/engine 从 4.418 变为 4.064、LPR@30 从 0.176 变为 0.137。任务与复合水平的方向混合。FD004 LPR@30 的五个复合水平效应均为负，但五个水平只能支持有限设计方向模式。精确符号翻转值、重采样诊断、多重调整和 Monte Carlo 不确定性统一移至补充材料，不在主文中承担决策统计角色。
+
+\begin{figure*}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_primary_fixed_task_diagnostic_envelope}
+\caption{四个固定任务上的 OCM-Asym 减 RAST-GRU。五个点以不同形状和颜色表示配对的耦合复合水平效应，黑色短线为固定任务均值；FD004 受开发信息影响。图中不显示不确定性包络。负值表示 OCM-Asym 更低，符号计数与重采样诊断另行报告。}
+\label{fig:primary-fixed-diagnostic-zh}
+\end{figure*}
+
+与设计匹配的交换零假设模拟在任务间共享训练种子符号，并在每个任务的三项指标间共享发动机符号。它只是对已完成设计的诊断性压力检查，不能弥补只有五个种子水平的限制；完整模拟设置与不确定性统一报告于补充材料。
+\FloatBarrier
+
+\subsection{[敏感性] 误差偏好与端点定义}
+
+OCM-Core 与 OCM-Asym 共享架构和协议，只改变晚误差乘数。Core 的宏平均 RMSE 更低（14.732 对 15.112），Asym 的 NASA/engine、LPR@30 和晚误差 CVaR$_{0.95}$ 更低。这些有限设计汇总描述预测误差偏好，不是维修策略决策或独立选择的最优点。
+
+\input{generated/table_core_asym_cmapss_zh.tex}
+\input{generated/table_preference_selection_stability_zh.tex}
+
+端点网格评估 $\epsilon\in\{0,0.5,1,2,5\}$ cycles 和 $\tau\in\{20,30,40,50\}$。FD004、$\tau=30$ 时，OCM-Asym 减 RAST-GRU 的 LPR 差从 $\epsilon=0$ 的 $-0.117$ 变为 $\epsilon=5$ 的 $-0.038$，不确定性随容差增大。LPR 与 eligible 发动机数、事件数、零膨胀平均晚超量 ZIMLE 和事件条件平均晚超量 CMLE 联合报告；无事件时 CMLE 未定义。语义化源文件为 \texttt{endpoint\_tolerance\_sensitivity.csv} 与 \texttt{late\_event\_support.csv}。
+
+\subsection{[敏感性] 归一化坐标扰动}
+
+算法扰动设计交叉五个耦合复合种子水平、五个扰动种子和同一批 248 台 FD004 测试发动机，并保留九类扰动、三项指标下 54 个 Core/Asym 对 RAST 方向。方向依赖扰动家族，不能支持稳定 OCM 优势；多重性诊断只放在补充材料。机器可读源为 \texttt{normalized\_perturbation\_contrasts.csv}。由于扰动在归一化后施加且没有原始单位容差模型，该分析只量化归一化坐标中的算法敏感性，不证明物理传感器故障鲁棒性。
+
+上述缺失曲线假定合成掩码可被完全观测，另一个元数据审计只扰动这些指示量。在各场景最强设置相对正确掩码参考下，RAST-GRU 的 RMSE 在 50\% 假阴性、20\% 假阳性和 10-cycle 块指示延迟时分别变化 $+0.149$、$+0.650$ 和 $+0.625$ cycle；OCM-Asym 对应变化为 $+0.026$、$+0.016$ 和 $+0.106$ cycle。指示量损坏时 LPR 可能向任一方向变化，因此这些描述性的 25-cell 均值不能证明校准检测器或鲁棒性排序。来源为 \texttt{mask\_metadata\_sensitivity\_summary.csv}。
+
+无重叠审计在训练时移除全部归一化坐标扰动增强，同时保留相同九族测试电池。相对研究参照的 $p=1$ 混合，无增强条件使 RAST-GRU 和 OCM-Core 的九族平均 LPR 分别增加 0.070 和 0.129，OCM-Asym 的差为 0.010；三个工作点的非对称决策代价汇总均上升。该联合留出说明结论依赖完整增强混合，但不能识别单一扰动族迁移或未知物理故障；所有扰动结论均以声明的增强混合为条件。完整 30 行位于 \texttt{no\_overlap\_augmentation\_audit.csv}。
+
+\subsection{[探索性] 协议与外部有效性边界}
+
+FD004 匹配归一化审计在相同划分、传感器、OCM-Asym 配置、预算、检查点规则和五个种子下比较全局缩放、官方状态取整、$K$-means 与连续工况校正。
+
+两个五种子配置轴对照部分限定了归因边界：在共享 Base 协议下比较 RAST 与 OCM backbone，并在固定 OCM backbone 时从 Base 逐步构建完整目标束。由于完整目标束没有交叉施加到 RAST backbone，这些对照仍不能识别模块主效应或 backbone--objective 交互。
+
+\begin{figure*}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_condition_normalization_controls}
+\caption{FD004 归一化构造敏感性。绝对五种子汇总和配对效应在补充材料中分表报告；该家族只作诊断，不能识别普遍正确的物理状态表示。}
+\label{fig:condition-normalization-controls-zh}
+\end{figure*}
+
+全局缩放的描述性 RMSE 为 $28.133\pm1.677$，明显高于工况特定方案。官方状态取整与 $K$-means 在全部已完成种子上产生相同预测（RMSE $16.324\pm0.572$；NASA/engine $5.480\pm0.321$；LPR@30 $0.226\pm0.075$），连续校正 RMSE 为 $17.094\pm0.630$。可支持的结论仅是工况处理影响该 FD004 配置；不能证明无监督聚类优于恰好一致的官方状态划分，也不声称 FD002 归一化收益。
+
+强下采样 N-CMAPSS DS02 代理只有三个官方测试 unit，且验证所选工况数与观察到的测试最优 RMSE 不一致。五条训练流下的回顾性 $3\times3$ 采样间隔--窗口网格得到 7.428--9.690 的平均 RMSE 和 0.342--0.466 的 LPR@30，且两个指标的最优单元不同。该结果暴露了表示依赖性，但不能构成外部验证。其余基线、消融、端点设计、运行时和表示分析均作为配置特定诊断收录于补充材料和 release manifest。
+\FloatBarrier

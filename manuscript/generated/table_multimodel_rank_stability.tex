@@ -1,0 +1,22 @@
+\begin{table}[!t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Retrospective multi-model ranking stability across the 260 stored formal runs. Each task has 13 models, six lower-is-better metrics, and five completed composite levels. The 15 metric pairs are compared within each task.}
+\label{tab:multimodel-rank-stability}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Task & Top-1 set changes & Top-3 set changes & Mean reversal fraction & Kendall $\tau_b$ range \\
+\midrule
+FD001 & 9/15 & 13/15 & 0.246 & 0.142--0.872 \\
+FD002 & 15/15 & 14/15 & 0.368 & $-0.090$--0.769 \\
+FD003 & 13/15 & 15/15 & 0.193 & 0.205--0.793 \\
+FD004 & 14/15 & 15/15 & 0.397 & $-0.205$--0.839 \\
+\bottomrule
+\end{tabular}
+\\[-2pt]
+\begin{minipage}{0.94\linewidth}
+\footnotesize
+Notes: The reversal fraction uses only model pairs that are non-tied under both metrics. Top-$k$ sets include all models at the $k$th rank when ties occur. These are descriptive summaries over completed cells, not probabilities, significance tests, or evidence from retraining all models under every preprocessing choice.
+\end{minipage}
+\end{table}

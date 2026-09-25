@@ -1,0 +1,3 @@
+name = "no_data_leakage"
+category = "reproducibility"
+description = "Feature selection and scaling must be fitted only on train_core."

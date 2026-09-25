@@ -1,0 +1,54 @@
+\input{generated/numbers.tex}
+\FloatBarrier
+\section{Results}
+
+\subsection{[FOCAL RESULT-INFORMED FIXED-TASK ESTIMATION] Accuracy and late-overprediction estimates}
+
+The focal comparison is OCM-Asym minus RAST-GRU on the official endpoint of each fixed C-MAPSS task. This family was formalized after earlier result review and has a descriptive estimation role. FD004 is development-informed; FD001--FD003 are fixed-transfer descriptions under the illustrative preference. Composite-seed levels and engine identities are crossed: each composite level jointly changes split, initialization, shuffle, and augmentation while predicting the same official engines. The four tasks are never treated as a task-population sample.
+
+The descriptive pattern is an accuracy--late-overprediction exchange. Relative to RAST-GRU, OCM-Asym changes equal-task macro RMSE from 14.989 to 15.112 cycles, NASA/engine from 4.418 to 4.064, and LPR@30 from 0.176 to 0.137. Task and composite-level directions are mixed. The five FD004 LPR@30 composite-level effects share a negative sign, but five levels support only a finite-design pattern. Exact sign-flip values, resampling diagnostics, multiplicity adjustments, and Monte Carlo uncertainty are reported in the Supplementary Information rather than used as main-text decision statistics.
+
+\begin{figure*}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_primary_fixed_task_diagnostic_envelope}
+\caption{OCM-Asym minus RAST-GRU on four fixed tasks. The five points use distinct marker shapes and colors for paired coupled-composite-level effects; the black tick is their fixed-task mean. FD004 is development-informed. No uncertainty envelope is shown. Negative values are lower for OCM-Asym; sign counts and resampling diagnostics are reported separately.}
+\label{fig:primary-fixed-diagnostic}
+\end{figure*}
+
+The design-matched swap-null calibration uses one shared training-seed sign across tasks and task-specific engine signs shared across the three metrics. It is a diagnostic stress test of this completed design, not a repair for having only five seed levels. Full simulation settings and uncertainty are reported in the Supplementary Information.
+\FloatBarrier
+
+\subsection{[SENSITIVITY] Error preference and endpoint definition}
+
+OCM-Core and OCM-Asym share the OCM architecture and protocol; only the late-error multiplier differs. Core has lower macro RMSE (14.732 versus 15.112 cycles), while Asym has lower NASA/engine (4.064 versus 4.530), LPR@30 (0.137 versus 0.159), and late-error CVaR$_{0.95}$ (3.999 versus 4.577). These finite-design summaries describe predictive-error preferences, not maintenance-policy decisions or independently selected optima.
+
+\input{generated/table_core_asym_cmapss.tex}
+\input{generated/table_preference_selection_stability.tex}
+
+The endpoint grid evaluates $\epsilon\in\{0,0.5,1,2,5\}$ cycles and $\tau\in\{20,30,40,50\}$. On FD004 at $\tau=30$, the OCM-Asym minus RAST-GRU LPR difference changes from $-0.117$ at $\epsilon=0$ to $-0.038$ at $\epsilon=5$, with increasing uncertainty. LPR is reported with eligible-engine counts, late-event counts, zero-inflated mean late excess (ZIMLE), and event-conditional mean late excess (CMLE). CMLE is undefined when no event occurs. The semantic source files are \texttt{endpoint\_tolerance\_sensitivity.csv} and \texttt{late\_event\_support.csv}.
+
+\subsection{[SENSITIVITY] Normalized-coordinate perturbations}
+
+The algorithmic perturbation design crosses five coupled composite-seed levels, five perturbation seeds, and the same 248 FD004 test engines. It retains 54 declared Core/Asym-versus-RAST directions across nine perturbation families and three metrics. Directions are family-dependent and do not support a stable OCM advantage; multiplicity diagnostics are confined to the Supplementary Information. The machine-readable source is \texttt{normalized\_perturbation\_contrasts.csv}. Because perturbations are imposed after normalization and have no raw-unit tolerance model, these results quantify algorithmic sensitivity in normalized coordinates, not physical sensor-fault robustness.
+
+The missingness curves above assume perfectly observed synthetic masks. A separate metadata audit perturbs only those indicators. At the strongest tested settings, relative to each scenario's correct-mask reference, RAST-GRU RMSE changes by $+0.149$ cycles for a 50\% false-negative rate, $+0.650$ for a 20\% false-positive rate, and $+0.625$ for a 10-cycle block-indicator delay; the corresponding OCM-Asym changes are $+0.026$, $+0.016$, and $+0.106$ cycles. LPR can move in either direction when indicators are corrupted, so these descriptive 25-cell means do not establish a calibrated detector or a robustness ordering. The source is \texttt{mask\_metadata\_sensitivity\_summary.csv}.
+
+A no-overlap audit removes all normalized-coordinate perturbation augmentation during training while retaining the same nine-family evaluation battery. Relative to the study-reference $p=1$ mixture, the no-augmentation condition increases nine-family mean LPR by 0.070 for RAST-GRU and 0.129 for OCM-Core, while the OCM-Asym difference is 0.010; asymmetric decision-cost summaries increase for every point. This joint hold-out exposes dependence on the complete augmentation mixture but does not isolate individual families or unseen physical faults. All perturbation statements are conditional on the declared mixture. The complete 30 rows are in \texttt{no\_overlap\_augmentation\_audit.csv}.
+
+\subsection{[EXPLORATORY] Protocol and external-validity boundaries}
+
+The matched FD004 normalization audit compares global scaling, rounded official-state grouping, $K$-means grouping, and continuous setting correction under the same split, sensors, OCM-Asym configuration, budget, checkpoint rule, and five seeds.
+
+Two matched five-seed configuration-axis controls partially delimit attribution: RAST and OCM backbones are compared under a shared Base protocol, and the OCM objective bundle is built from Base to full while holding the OCM backbone fixed. Because the full objective bundle is not crossed onto the RAST backbone, these controls do not identify module main effects or backbone--objective interactions.
+
+\begin{figure*}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_condition_normalization_controls}
+\caption{FD004 normalization-construction sensitivity. Absolute five-seed summaries and paired effects are separated in the Supplementary Information. This family is diagnostic and cannot identify a generally correct physical state representation.}
+\label{fig:condition-normalization-controls}
+\end{figure*}
+
+Global scaling is descriptively worse (RMSE $28.133\pm1.677$) than the condition-specific alternatives. Rounded official-state grouping and $K$-means produce identical predictions in every completed seed (RMSE $16.324\pm0.572$; NASA/engine $5.480\pm0.321$; LPR@30 $0.226\pm0.075$), while continuous correction has RMSE $17.094\pm0.630$. The defensible conclusion is that condition handling matters for this FD004 configuration; no special advantage of unsupervised clustering over the coincident official-state partition is identified, and no FD002 normalization effect is claimed.
+
+The strongly downsampled N-CMAPSS DS02 proxy has only three official test units and a condition-count mismatch between validation selection and observed test RMSE. A retrospective $3\times3$ sampling-interval--window grid under five training streams gives mean RMSE 7.428--9.690 and LPR@30 0.342--0.466, with different cells minimizing the two metrics. This exposes representation dependence but does not create external validation. The remaining baseline, ablation, endpoint-design, runtime, and representation analyses are reported as configuration-specific diagnostics in the Supplementary Information and release manifest.
+\FloatBarrier

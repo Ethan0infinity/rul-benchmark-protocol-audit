@@ -1,0 +1,11 @@
+{
+  "name": "fd001_smoke_baseline",
+  "status": "optional",
+  "checks": [
+    "metrics.json exists",
+    "test_predictions.csv exists",
+    "selection_metric is val_last_rmse",
+    "test rows equal 100",
+    "0 < test_rmse < 150"
+  ]
+}

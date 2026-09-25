@@ -1,0 +1,46 @@
+\input{generated/numbers.tex}
+\FloatBarrier
+\section{Results}
+
+\subsection{[PRIMARY FROZEN] Fixed-task accuracy and late-overprediction}
+
+The frozen-before-reported-analysis comparison is OCM-Asym minus its direct predecessor RAST-GRU on the four official C-MAPSS test-engine endpoint tasks. Training seed and engine identity are crossed factors: every composite seed predicts the same official engines. The revised inference therefore draws composite-seed levels and matched engine IDs independently, applies the same engine draw to every selected seed, and preserves model pairing. It does not pool repeated engine outcomes into an exact McNemar table.
+
+The mean pattern remains an accuracy--late-overprediction exchange: relative to RAST-GRU, OCM-Asym changes equal-task macro RMSE from 14.989 to 15.112 cycles, NASA/engine from 4.418 to 4.064, and LPR@30 from 0.176 to 0.137. However, no contrast survives the one Holm correction across all 12 primary tests. FD004 LPR@30 has a nominal crossed 95\% interval below zero, but its Holm$_{12}$ value is 0.192, its max-$t$ adjusted value is 0.174, and the exact five-seed sign-flip value is 0.0625. It is therefore a suggestive effect estimate rather than confirmatory evidence. The complete nominal and simultaneous intervals, finite-bootstrap precision, and sign-flip results are reported in the Supplementary Information.
+
+\begin{figure*}[!t]
+\centering
+\bestgraphic[width=0.92\textwidth]{figures/fig_round3_primary_simultaneous_forest}
+\caption{[PRIMARY FROZEN] OCM-Asym minus RAST-GRU on four fixed tasks. Blue intervals are nominal crossed 95\% intervals; wider gray bars are max-$t$ simultaneous 95\% intervals across all 12 primary contrasts. Negative effects favor OCM-Asym. No contrast passes Holm$_{12}$, and interval direction alone is not treated as a decision.}
+\label{fig:round3-primary-crossed}
+\end{figure*}
+\FloatBarrier
+
+\subsection{[POST-FREEZE SENSITIVITY] Predictive error preference}
+
+OCM-Core and OCM-Asym share the same architecture and training protocol; only the late-error multiplier differs. Core has lower mean macro RMSE (14.732 versus 15.112 cycles), while Asym has lower mean NASA/engine (4.064 versus 4.530), LPR@30 (0.137 versus 0.159), and late-error CVaR$_{0.95}$ (3.999 versus 4.577). Their paired macro intervals include zero. These are researcher-declared predictive-error operating points, not maintenance-policy decisions or independently selected optima.
+
+\input{generated/table_core_asym_cmapss.tex}
+
+The LPR conclusion is not tied only to floating-point positivity. A crossed sensitivity grid evaluates $\epsilon\in\{0,0.5,1,2,5\}$ cycles and $\tau\in\{20,30,40,50\}$. On FD004 at $\tau=30$, the OCM-Asym minus RAST-GRU mean changes from $-0.117$ at $\epsilon=0$ to $-0.038$ at $\epsilon=5$; intervals become increasingly unresolved as the tolerance grows. One Holm family covers the complete 80-cell grid, and eligible-engine and late-event counts are reported for every cell. Conditional positive-tail severity is undefined when no event occurs, whereas zero-inflated mean late excess remains defined over all eligible engines. LPR is therefore interpreted jointly with event support and magnitude, not as a stand-alone safety endpoint. The complete record is \texttt{round3\_endpoint\_sensitivity.csv} and \texttt{round3\_late\_event\_counts.csv}.
+
+\subsection{[POST-FREEZE SENSITIVITY] Normalized-space perturbations}
+
+The stress design crosses five training seeds, five perturbation seeds, and the same 248 FD004 test engines. Revised inference resamples all three factor levels independently and preserves matched engine and perturbation identities across operating points. One joint Holm family covers two OCM points, nine perturbation families, and three declared metrics (54 contrasts).
+
+\input{generated/table_round2_stress_holm.tex}
+
+After joint correction, no contrast supports a lower OCM response. Three mean-late-excess contrasts support lower RAST-GRU and the remaining 51 are unresolved. Unadjusted direction counts and heat-map colors are no longer used as support statements. The complete effect estimates, crossed intervals, centered-bootstrap values, adjusted $p$ values, and status labels are the machine-readable inferential record in \texttt{round2\_stress\_crossed\_holm.csv}. Because amplitudes are imposed after normalization, this section evaluates algorithmic sensitivity to normalized-space perturbations, not physical sensor faults or deployment robustness.
+
+\subsection{[EXPLORATORY] Protocol, transfer, and representation audits}
+
+The remaining analyses delimit rather than extend the primary claim. FD002 does not confirm the FD004 late-frequency pattern: none of its RMSE, NASA/engine, or LPR contrasts is resolved, and one asymmetric-error-utility contrast survives a separate 20-test Holm family. The fixed N-CMAPSS DS02 task has only three official test units; validation-only selection chooses $K=4$ while the observed test-best RMSE occurs at $K=8$. It is retained as a single-task failure analysis, not cross-dataset confirmation.
+
+Condition normalization removes most linearly decodable operating-regime information and is the strongest removal ablation, while $K$-means exactly recovers the rounded six-state setting partition on this benchmark. A matched FD004 control now compares global scaling, rounded official-state grouping, $K$-means grouping, and continuous setting correction under the same five seeds and OCM-Asym protocol. The comparison identifies construction sensitivity without treating any grouping as physical ground truth or a retuned primary model. Reliability and attention outputs are likewise representation diagnostics: their modest localization/calibration values do not establish physical fault detection or causal mechanism.
+
+\input{generated/table_condition_normalization_controls.tex}
+
+Global standardization is substantially worse descriptively (RMSE $28.133\pm1.677$) than condition-specific alternatives. Rounded official-state grouping and $K$-means produce identical predictions in every seed (RMSE $16.324\pm0.572$; NASA/engine $5.480\pm0.321$; LPR@30 $0.226\pm0.075$), because the fitted $K$-means partition coincides with the rounded six-state partition in these training cores. Continuous correction is close but not resolved against $K$-means (RMSE $17.094\pm0.630$). The crossed-Holm RMSE comparison with global scaling is directional ($p=0.0009$), but the exact five-seed sign-flip value is limited to 0.0625; given the small-cluster calibration and post-lock status, this is not promoted to a confirmatory claim. The defensible interpretation is that condition-specific scaling matters on FD004, whereas no special advantage of unsupervised clustering over known-state grouping is identified.
+
+Two TCN-GRU cells meet the prespecified diagnostic flag RMSE $>50$ cycles. Keeping them gives TCN-GRU mean ranks 10.20, 9.05, and 6.20 for RMSE, NASA/engine, and LPR; excluding only the flagged cells changes them to 9.89, 8.61, and 5.61. The broad benchmark context changes modestly, but the failure remains evidence of architecture--checkpoint incompatibility. Full ablations, endpoint designs, protocol build-ups, official-code-derived comparisons, runtime audits, tidy row-level outputs, and source schemas are reported in the Supplementary Information and replication package.
+\FloatBarrier

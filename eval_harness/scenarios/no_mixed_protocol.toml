@@ -1,0 +1,3 @@
+name = "no_mixed_protocol"
+category = "research-integrity"
+description = "paper_outputs must not cite archive, smoke, quick, or old mixed-protocol runs."

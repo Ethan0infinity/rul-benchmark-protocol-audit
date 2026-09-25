@@ -1,0 +1,5 @@
+name: leakage_guard
+purpose: Verify that unit splitting happens before feature selection and validation units do not enter train_core.
+expected_checks:
+  - train_val_units_disjoint
+  - selected_sensors_from_train_core

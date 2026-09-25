@@ -1,0 +1,25 @@
+\begin{table}[!t]
+\centering
+\caption{Transparent candidate magnitude-band sensitivity.}
+\label{tab:candidate-magnitude-band}
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+Domain & Metric & Margin & Mean contrast & Within & Negative beyond & Positive beyond \\
+\midrule
+C-MAPSS & RMSE & 0.5 & +0.1227 & 5/20 & 7 & 8 \\
+C-MAPSS & RMSE & 1 & +0.1227 & 14/20 & 3 & 3 \\
+C-MAPSS & RMSE & 2 & +0.1227 & 17/20 & 1 & 2 \\
+C-MAPSS & LPR30 & 0.01 & -0.0383 & 1/20 & 12 & 7 \\
+C-MAPSS & LPR30 & 0.025 & -0.0383 & 2/20 & 12 & 6 \\
+C-MAPSS & LPR30 & 0.05 & -0.0383 & 8/20 & 8 & 4 \\
+NASA battery & RMSE & 0.5 & +2.5455 & 1/5 & 0 & 4 \\
+NASA battery & RMSE & 1 & +2.5455 & 2/5 & 0 & 3 \\
+NASA battery & RMSE & 2 & +2.5455 & 2/5 & 0 & 3 \\
+NASA battery & LPR & 0.01 & -0.0777 & 2/5 & 2 & 1 \\
+NASA battery & LPR & 0.025 & -0.0777 & 2/5 & 2 & 1 \\
+NASA battery & LPR & 0.05 & -0.0777 & 2/5 & 2 & 1 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.98\linewidth}\footnotesize Notes: Negative/positive are first-minus-second contrasts beyond the displayed symmetric margin. Margins were introduced after outcome access and are not application-validated smallest effects of interest. The table separates sign sensitivity from magnitude sensitivity; it is not a formal equivalence test.\end{minipage}
+\end{table}
